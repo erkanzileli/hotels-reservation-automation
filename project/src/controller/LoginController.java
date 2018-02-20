@@ -10,5 +10,8 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 	}
+	public void hi() {
+		System.out.println("okay");
+	}
 
 }
