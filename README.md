@@ -1,1 +1,1 @@
-othel-reservation-automation
+hotels-reservation-automation
