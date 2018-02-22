@@ -6,15 +6,21 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
+	private Scene signUpscene;
 
+	public void setSignUpScene(Scene signUpScene) {
+		signUpscene=signUpScene;
+	}
+	
 	@FXML
 	private Button login;
-	
 	
 	@FXML
 	private Button sign_up;
@@ -36,7 +42,8 @@ public class LoginController implements Initializable {
 			if (user_email.getText().isEmpty() || user_password.getText().isEmpty()) {
 				System.out.println("düzgün veri girin");
 			} else {
-					System.out.println(user_email.getText() +" -- "+user_password.getText());
+				Stage stage=(Stage) login.getScene().getWindow();
+				stage.setScene(signUpscene);
 			}
 		}else if(actionEvent.getSource().equals(forget_password)) {
 			System.out.println("mal þifre unutulur mu :D");
