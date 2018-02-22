@@ -16,6 +16,7 @@ public class MainClass extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
 		primaryStage.setResizable(false);
+		//fatma
         primaryStage.setScene(new Scene(root, 870, 526));
 		primaryStage.show();
 	}
