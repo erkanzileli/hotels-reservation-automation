@@ -2,13 +2,13 @@ package model;
 
 import javafx.scene.layout.Pane;
 
-public class RoomPaneModel extends Pane {
+public class PaneModel extends Pane {
 
 	public int idRoom;
 
 	public int idHotel;
 
-	public RoomPaneModel() {
+	public PaneModel() {
 	}
 
 	public int getIdRoom() {

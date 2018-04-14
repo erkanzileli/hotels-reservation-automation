@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton.ButtonType;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialog.DialogTransition;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -16,13 +15,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import model.RoomPaneModel;
+import model.PaneModel;
 
 public class ReceptionistMainController implements Initializable {
 
@@ -35,12 +33,26 @@ public class ReceptionistMainController implements Initializable {
 	@FXML
 	private GridPane gridPane;
 
-	private List<RoomPaneModel> listOfRooms;
+	private List<PaneModel> listOfRooms;
 
 	private List<String> data;
 
+	public static PaneModel selectedRoom;
+
+	public static JFXDialog roomInfoDialog;
+
 	@FXML
 	void profile() {
+		Parent dialogFXML = null;
+		try {
+			dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JFXDialogLayout dialogLayout = new JFXDialogLayout();
+		dialogLayout.setBody(dialogFXML);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.RIGHT);
+		dialog.show();
 
 	}
 
@@ -53,7 +65,7 @@ public class ReceptionistMainController implements Initializable {
 
 	private void fillGridPane() {
 		// SQL sorgusu sonucuna göre listeye aktarýlýr
-		listOfRooms = new ArrayList<RoomPaneModel>();
+		listOfRooms = new ArrayList<PaneModel>();
 
 		int listSize = data.size();
 
@@ -61,7 +73,7 @@ public class ReceptionistMainController implements Initializable {
 		int rowCounter = 0;
 
 		for (int i = 0; i < listSize; i++) {
-			RoomPaneModel roomPaneModel = new RoomPaneModel();
+			PaneModel roomPaneModel = new PaneModel();
 			gridPane.add(roomPaneModel, columnCounter, rowCounter);
 			listOfRooms.add(roomPaneModel);
 			// her satýrda 7 oda
@@ -115,26 +127,63 @@ public class ReceptionistMainController implements Initializable {
 	private void setRoomPanes() {
 		for (int index = 0; index < listOfRooms.size(); index++) {
 			// header text
-			Label text = new Label(String.valueOf("Oda Numarasý:" + index + 1));
+			Label text = new Label(data.get(index));
 			text.setAlignment(Pos.CENTER);
 			text.setLayoutY(5);
 			text.setMinWidth(150);
-			RoomPaneModel roomPaneModel = listOfRooms.get(index);
-			roomPaneModel.getChildren().add(text);
+			// body text
+			Label content = new Label("Durum : Müsait");
+			content.setAlignment(Pos.CENTER);
+			content.setLayoutY(35);
+			content.setMinWidth(150);
+			Label description = new Label("Yatak Sayýsý : 2");
+			description.setAlignment(Pos.CENTER);
+			description.setLayoutY(65);
+			description.setMinWidth(150);
+			PaneModel roomPaneModel = listOfRooms.get(index);
+			roomPaneModel.getChildren().addAll(text, content, description);
+			// odanýn bilgileri Pane üzerinden aktarýlýr
+			roomPaneModel.idRoom = index;
+			roomPaneModel.idHotel = index;
 			roomPaneModel.setOnMouseClicked(e -> {
 				// roomInfo dialog
-				Parent dialogFXML = null;
-				try {
-					dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/RoomInfo.fxml"));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				JFXDialogLayout dialogLayout = new JFXDialogLayout();
-				dialogLayout.setBody(dialogFXML);
-				JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.CENTER);
-				dialog.show();
+				loadRoomInfoDialog();
+				// Seçilen odaya rezervasyon yapýlmak istendiði takdirde kullanýlýr
+				setSelectedRoom(roomPaneModel);
 			});
 		}
+	}
+
+	private void loadRoomInfoDialog() {
+		Parent dialogFXML = null;
+		try {
+			dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/RoomInfo.fxml"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JFXDialogLayout dialogLayout = new JFXDialogLayout();
+		dialogLayout.setBody(dialogFXML);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.CENTER);
+		dialog.show();
+		setRoomInfoDialog(dialog);
+
+	}
+
+	// Rezervasyon oluþturmak istendiðinde oda bilgilerinin diðer diyaloga
+	// aktarýlmasý
+	private void setSelectedRoom(PaneModel room) {
+		selectedRoom = room;
+	}
+
+	/*
+	 * Rezervasyon yapma isteðinin olmasý durumunda roomInfo diyalogu kapanýp
+	 * rezervasyon oluþturma diyaloðu açýlýr
+	 */
+	private void setRoomInfoDialog(JFXDialog dialog) {
+		roomInfoDialog = dialog;
+	}
+
+	public static JFXDialog getRoomInfoDialog() {
+		return roomInfoDialog;
 	}
 }
