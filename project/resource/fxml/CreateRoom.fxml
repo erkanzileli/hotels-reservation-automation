@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="15.0" layoutY="15.0" text="Oda Ekleyin">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Oda Numarası" />
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Oda Tipi" />
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="175.0" prefHeight="25.0" prefWidth="150.0" promptText="Telefon Numarası" />
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Özellikler" />
+            <Label layoutX="225.0" layoutY="25.0" text="Yatak Tanımı">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Yatak Tipi" />
+            <JFXTextField focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Kişi Sayısı" />
+            <JFXButton focusTraversable="false" layoutX="225.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #40ff57;" text="Kaydet" />
+         </children>
+      </Pane>
+   </children>
+</JFXDialogLayout>

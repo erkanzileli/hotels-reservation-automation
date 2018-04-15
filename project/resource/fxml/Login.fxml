@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #ffb74d;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="root" fx:controller="controller.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutY="15.0" prefWidth="400.0" text="Otel Rezervasyon Sistemi" textFill="#5b5b5b">
+      <Label alignment="CENTER" layoutY="15.0" prefWidth="400.0" text="Otel Rezervasyon Sistemi">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtMemberName" alignment="CENTER" focusColor="#5b5b5b" layoutX="100.0" layoutY="100.0" prefHeight="30.0" prefWidth="200.0" promptText="Kullanıcı Adı" unFocusColor="#808080">
+      <JFXTextField fx:id="txtMemberName" alignment="CENTER" focusColor="WHITE" layoutX="100.0" layoutY="100.0" prefHeight="30.0" prefWidth="200.0" promptText="Kullanıcı Adı" unFocusColor="GREY">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txtPasswd" alignment="CENTER" focusColor="#5b5b5b" layoutX="100.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Şifre" unFocusColor="#808080">
+      <JFXTextField fx:id="txtPasswd" alignment="CENTER" focusColor="WHITE" layoutX="100.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Şifre" unFocusColor="#808080">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXButton defaultButton="true" layoutX="100.0" layoutY="200.0" onAction="#login" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #fb8c00;" text="Giriş">
+      <JFXButton buttonType="RAISED" defaultButton="true" layoutX="100.0" layoutY="200.0" onAction="#login" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: orange;" text="Giriş">
          <font>
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="125.0" layoutY="260.0" onAction="#forgotPassword" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #fb8c00;" text="Şifremi Unuttum" />
+      <JFXButton buttonType="RAISED" layoutX="125.0" layoutY="260.0" onAction="#forgotPassword" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: orange;" text="Şifremi Unuttum" />
    </children>
 </Pane>

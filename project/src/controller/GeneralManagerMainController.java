@@ -113,12 +113,30 @@ public class GeneralManagerMainController implements Initializable {
 
 	@FXML
 	private void loadCreateHotelDialog() {
-
+		Parent dialogFXML = null;
+		try {
+			dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/CreateHotel.fxml"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JFXDialogLayout dialogLayout = new JFXDialogLayout();
+		dialogLayout.setBody(dialogFXML);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.TOP);
+		dialog.show();
 	}
 
 	@FXML
 	private void profile() {
-
+		Parent dialogFXML = null;
+		try {
+			dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/Profile.fxml"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		JFXDialogLayout dialogLayout = new JFXDialogLayout();
+		dialogLayout.setBody(dialogFXML);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.RIGHT);
+		dialog.show();
 	}
 
 }
