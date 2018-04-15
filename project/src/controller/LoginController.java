@@ -50,17 +50,16 @@ public class LoginController implements Initializable {
 	public void hi(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(login)) {
 			if (user_email.getText().isEmpty() || user_password.getText().isEmpty()) {
-				System.out.println("düzgün veri girin");
+				System.out.println("dï¿½zgï¿½n veri girin");
 			} else {
 				Stage stage = (Stage) login.getScene().getWindow();
 				stage.setScene(signUpscene);
 			}
 		} else if (actionEvent.getSource().equals(forget_password)) {
-			System.out.println("mal þifre unutulur mu :D");
+			System.out.println("mal ï¿½ifre unutulur mu :D");
 		} else {
 			System.out.println("sign");
 		}
 
 	}
-
 }

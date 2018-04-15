@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<JFXDialogLayout fx:id="root" fx:controller="controller.RoomInfoController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="700.0">
+         <children>
+            <JFXButton onAction="#createReservation" focusTraversable="false" layoutX="15.0" layoutY="275.0" prefHeight="100.0" prefWidth="465.0" style="-fx-background-color: #67ff59;" text="Odayı Rezerve Et" />
+            <Label layoutX="10.0" prefHeight="50.0" text="24 Numaralı Oda">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="75.0" text="Oda Tipi : ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomType" layoutX="100.0" layoutY="75.0" text="Kral Dairesi">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="125.0" text="Oda Numarası : ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomType1" layoutX="150.0" layoutY="125.0" text="854">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="175.0" text="Oda Durumu : ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomStatus" layoutX="150.0" layoutY="175.0" text="Müsait">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="225.0" text="Yatak Sayısı : ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomBedCount" layoutX="150.0" layoutY="225.0" text="1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="225.0" layoutY="75.0" text="Telefon Numarası :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomPhoneNumber" layoutX="375.0" layoutY="75.0" text="02122468648">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="225.0" layoutY="125.0" text="Buzdolabı :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="roomFreeze" layoutX="325.0" layoutY="125.0" text="Var">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</JFXDialogLayout>
