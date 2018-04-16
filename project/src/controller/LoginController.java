@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
@@ -50,15 +52,25 @@ public class LoginController implements Initializable {
 	public void hi(ActionEvent actionEvent) {
 		if (actionEvent.getSource().equals(login)) {
 			if (user_email.getText().isEmpty() || user_password.getText().isEmpty()) {
-				System.out.println("d�zg�n veri girin");
+				System.out.println("düzgün veri girin");
 			} else {
-				Stage stage = (Stage) login.getScene().getWindow();
-				stage.setScene(signUpscene);
 			}
 		} else if (actionEvent.getSource().equals(forget_password)) {
-			System.out.println("mal �ifre unutulur mu :D");
+
+			TextInputDialog dialog=new TextInputDialog();
+			dialog.setTitle("Sifremi Unutttum !");
+			dialog.setHeaderText("Lütfen mail adresinizi giriniz ");
+			Optional<String> result = dialog.showAndWait();
+			if (result.isPresent()){
+			user_email.setText(result.get());
+			}
+
+
+
 		} else {
-			System.out.println("sign");
+
+            Stage stage = (Stage) login.getScene().getWindow();
+            stage.setScene(signUpscene);
 		}
 
 	}
