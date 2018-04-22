@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="870.0" style="-fx-background-color: #db9729; -fx-border-color: #31263e; -fx-border-width: 0.2em;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="367.0" layoutY="23.0" text="Kayıt Ekranı" textAlignment="CENTER" AnchorPane.leftAnchor="370.0" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXTextField alignment="TOP_CENTER" focusColor="#31263e" layoutX="349.0" layoutY="54.0" prefHeight="30.0" prefWidth="200.0" promptText="T.C." unFocusColor="#34215b" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="60.0" />
+      <JFXTextField alignment="TOP_CENTER" focusColor="#31263e" layoutX="335.0" layoutY="107.0" prefHeight="30.0" prefWidth="200.0" promptText="İsim" unFocusColor="#34215b" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="100.0" />
+      <JFXTextField alignment="TOP_CENTER" focusColor="#31263e" layoutX="342.0" layoutY="155.0" prefHeight="30.0" prefWidth="200.0" promptText="Soyisim" unFocusColor="#34215b" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="140.0" />
+      <JFXTextField alignment="TOP_CENTER" focusColor="#31263e" layoutX="328.0" layoutY="208.0" prefHeight="30.0" prefWidth="200.0" promptText="Telefon Numarası" unFocusColor="#34215b" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="180.0" />
+      <JFXPasswordField alignment="TOP_CENTER" focusColor="#31263e" promptText="Sifre" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="220.0" />
+      <JFXPasswordField alignment="TOP_CENTER" focusColor="#31263e" promptText="Sifre Tekrar" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="260.0" />
+      <JFXDatePicker defaultColor="#31263e" layoutX="320.0" layoutY="307.0" promptText="Doğum Tarihi" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="300.0" />
+      <JFXButton alignment="TOP_CENTER" buttonType="RAISED" layoutX="405.0" layoutY="414.0" style="-fx-border-color: #31263e; -fx-border-radius: 3em; -fx-background-radius: 3em;" text="KAYIT OL" textAlignment="CENTER" AnchorPane.bottomAnchor="118.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="360.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
