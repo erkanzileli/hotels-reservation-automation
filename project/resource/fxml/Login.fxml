@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="root" fx:controller="controller.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: orange;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutY="15.0" prefWidth="400.0" text="Otel Rezervasyon Sistemi">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtMemberName" alignment="CENTER" focusColor="WHITE" layoutX="100.0" layoutY="100.0" prefHeight="30.0" prefWidth="200.0" promptText="Kullanıcı Adı" unFocusColor="GREY">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtPasswd" alignment="CENTER" focusColor="WHITE" layoutX="100.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" promptText="Şifre" unFocusColor="#808080">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton buttonType="RAISED" defaultButton="true" layoutX="100.0" layoutY="200.0" onAction="#login" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: orange;" text="Giriş">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="125.0" layoutY="260.0" onAction="#forgotPassword" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: orange;" text="Şifremi Unuttum" />
+   </children>
+</Pane>
