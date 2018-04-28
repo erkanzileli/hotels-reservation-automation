@@ -1,6 +1,5 @@
 package main;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -12,11 +11,10 @@ import javafx.stage.Stage;
 
 public class MainClass extends Application {
 
-	public static EntityManager entityManager;
+	public static EntityManagerFactory entityManagerFactory;
 
 	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysqlPersistenceUnit");
-		entityManager = emf.createEntityManager();
+		entityManagerFactory = Persistence.createEntityManagerFactory("mysqlPersistenceUnit");
 		launch(args);
 	}
 

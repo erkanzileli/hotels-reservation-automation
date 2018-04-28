@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDialog;
@@ -15,11 +16,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import model.PaneModel;
 
 public class ReceptionistMainController implements Initializable {
@@ -63,8 +70,36 @@ public class ReceptionistMainController implements Initializable {
 		setRoomPanes();
 	}
 
+	@FXML
+	public void logout() {
+		ButtonType cancelButton = new ButtonType("Ä°ptal", ButtonData.NO);
+		ButtonType logoutButton = new ButtonType("Ã‡Ä±kÄ±ÅŸ Yap", ButtonData.YES);
+		Alert logoutAlert = new Alert(AlertType.CONFIRMATION, "Ã‡Ä±kÄ±ÅŸ yapmak istiyor musunuz?", cancelButton,
+				logoutButton);
+		logoutAlert.headerTextProperty().set(null);
+		logoutAlert.setTitle("Ã‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor!");
+		Optional<ButtonType> result = logoutAlert.showAndWait();
+		result.ifPresent(buttonData -> {
+			if (buttonData.getButtonData() == ButtonData.YES) {
+				root.getScene().getWindow().hide();
+				Stage stage = new Stage();
+				Parent root = null;
+				try {
+					root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				stage.setScene(new Scene(root));
+				stage.setTitle("Login");
+				stage.setResizable(false);
+				stage.show();
+			}
+		});
+	}
+
 	private void fillGridPane() {
-		// SQL sorgusu sonucuna göre listeye aktarýlýr
+		// SQL sorgusu sonucuna gï¿½re listeye aktarï¿½lï¿½r
 		listOfRooms = new ArrayList<PaneModel>();
 
 		int listSize = data.size();
@@ -76,10 +111,10 @@ public class ReceptionistMainController implements Initializable {
 			PaneModel roomPaneModel = new PaneModel();
 			gridPane.add(roomPaneModel, columnCounter, rowCounter);
 			listOfRooms.add(roomPaneModel);
-			// her satýrda 7 oda
+			// her satï¿½rda 7 oda
 			if (columnCounter == 6) {
 				columnCounter = 0;
-				// satýr dolduðunda alt satýra geçiþ
+				// satï¿½r dolduï¿½unda alt satï¿½ra geï¿½iï¿½
 				rowCounter++;
 				gridPane.getRowConstraints().add(new RowConstraints(150));
 			} else {
@@ -132,23 +167,23 @@ public class ReceptionistMainController implements Initializable {
 			text.setLayoutY(5);
 			text.setMinWidth(150);
 			// body text
-			Label content = new Label("Durum : Müsait");
+			Label content = new Label("Durum : Mï¿½sait");
 			content.setAlignment(Pos.CENTER);
 			content.setLayoutY(35);
 			content.setMinWidth(150);
-			Label description = new Label("Yatak Sayýsý : 2");
+			Label description = new Label("Yatak Sayï¿½sï¿½ : 2");
 			description.setAlignment(Pos.CENTER);
 			description.setLayoutY(65);
 			description.setMinWidth(150);
 			PaneModel roomPaneModel = listOfRooms.get(index);
 			roomPaneModel.getChildren().addAll(text, content, description);
-			// odanýn bilgileri Pane üzerinden aktarýlýr
+			// odanï¿½n bilgileri Pane ï¿½zerinden aktarï¿½lï¿½r
 			roomPaneModel.idRoom = index;
 			roomPaneModel.idHotel = index;
 			roomPaneModel.setOnMouseClicked(e -> {
 				// roomInfo dialog
 				loadRoomInfoDialog();
-				// Seçilen odaya rezervasyon yapýlmak istendiði takdirde kullanýlýr
+				// Seï¿½ilen odaya rezervasyon yapï¿½lmak istendiï¿½i takdirde kullanï¿½lï¿½r
 				setSelectedRoom(roomPaneModel);
 			});
 		}
@@ -169,15 +204,15 @@ public class ReceptionistMainController implements Initializable {
 
 	}
 
-	// Rezervasyon oluþturmak istendiðinde oda bilgilerinin diðer diyaloga
-	// aktarýlmasý
+	// Rezervasyon oluï¿½turmak istendiï¿½inde oda bilgilerinin diï¿½er diyaloga
+	// aktarï¿½lmasï¿½
 	private void setSelectedRoom(PaneModel room) {
 		selectedRoom = room;
 	}
 
 	/*
-	 * Rezervasyon yapma isteðinin olmasý durumunda roomInfo diyalogu kapanýp
-	 * rezervasyon oluþturma diyaloðu açýlýr
+	 * Rezervasyon yapma isteï¿½inin olmasï¿½ durumunda roomInfo diyalogu kapanï¿½p
+	 * rezervasyon oluï¿½turma diyaloï¿½u aï¿½ï¿½lï¿½r
 	 */
 	private void setRoomInfoDialog(JFXDialog dialog) {
 		roomInfoDialog = dialog;

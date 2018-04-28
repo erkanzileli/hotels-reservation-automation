@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
@@ -24,7 +25,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <Label layoutX="25.0" layoutY="25.0" text="Oteller" textFill="WHITE">
+            <Label layoutX="25.0" layoutY="50.0" text="Oteller" textFill="WHITE">
                <font>
                   <Font size="36.0" />
                </font>
@@ -55,6 +56,14 @@
                </font>
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="GRAPHIC_ONLY" focusTraversable="false" graphicTextGap="10.0" onAction="#logout" prefHeight="25.0" prefWidth="50.0" ripplerFill="BLACK" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <graphic>
+                  <MaterialDesignIconView glyphName="POWER" size="25" />
                </graphic>
             </JFXButton>
          </children></Pane>

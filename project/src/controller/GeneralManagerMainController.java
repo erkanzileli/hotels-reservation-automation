@@ -4,23 +4,37 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXDialog.DialogTransition;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import entity.GeneralManager;
+import entity.Hotel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.StackPane;
-import model.PaneModel;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import main.MainClass;
+import model.PaneModel;
 
 public class GeneralManagerMainController implements Initializable {
 
@@ -35,30 +49,71 @@ public class GeneralManagerMainController implements Initializable {
 
 	private List<String> data;
 
+	private List<Hotel> hotels;
+
+	public static int idAccount;
+
+	private GeneralManager generalManager;
+
+	private EntityManager entityManager;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		entityManager = MainClass.entityManagerFactory.createEntityManager();
 		getData();
-		fillGridPane();
-		setHotelPanes();
+		// fillGridPane();
+		// setHotelPanes();
 
+	}
+
+	@FXML
+	public void logout() {
+		ButtonType cancelButton = new ButtonType("Ä°ptal", ButtonData.NO);
+		ButtonType logoutButton = new ButtonType("Ã‡Ä±kÄ±ÅŸ Yap", ButtonData.YES);
+		Alert logoutAlert = new Alert(AlertType.CONFIRMATION, "Ã‡Ä±kÄ±ÅŸ yapmak istiyor musunuz?", cancelButton,
+				logoutButton);
+		logoutAlert.headerTextProperty().set(null);
+		logoutAlert.setTitle("Ã‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor!");
+		Optional<ButtonType> result = logoutAlert.showAndWait();
+		result.ifPresent(buttonData -> {
+			if (buttonData.getButtonData() == ButtonData.YES) {
+				root.getScene().getWindow().hide();
+				Stage stage = new Stage();
+				Parent root = null;
+				try {
+					root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				stage.setScene(new Scene(root));
+				stage.setTitle("Login");
+				stage.setResizable(false);
+				stage.show();
+			}
+		});
 	}
 
 	private void getData() {
 		// SQL
-		data = new ArrayList<String>();
-		data.add("Hotel 1");
-		data.add("Hotel 2");
-		data.add("Hotel 3");
-		data.add("Hotel 4");
-		data.add("Hotel 5");
-		data.add("Hotel 6");
-		data.add("Hotel 7");
-		data.add("Hotel 8");
-		data.add("Hotel 9");
+		Query query = entityManager.createNativeQuery("SELECT * FROM GeneralManager WHERE idAccount=1?",
+				GeneralManager.class);
+		query.setParameter(1, idAccount);
+		List<GeneralManager> gm = query.getResultList();
+		if (gm.isEmpty()) {
+			Alert alertNotFound = new Alert(AlertType.ERROR,
+					"Bilinmeyen bir hata oluÅŸtu. SaÄŸlayÄ±cÄ±nÄ±z ile iletiÅŸime geÃ§iniz");
+			alertNotFound.headerTextProperty().set(null);
+			alertNotFound.setTitle("Hata");
+			alertNotFound.show();
+			// System.exit();
+		} else {
+			// generalManager = gm.get(0);
+		}
 	}
 
 	private void fillGridPane() {
-		// SQL sorgusu sonucuna göre listeye aktarýlýr
+		// SQL sorgusu sonucuna gï¿½re listeye aktarï¿½lï¿½r
 		listOfHotels = new ArrayList<PaneModel>();
 
 		int listSize = data.size();
@@ -70,10 +125,10 @@ public class GeneralManagerMainController implements Initializable {
 			PaneModel paneModel = new PaneModel();
 			gridPane.add(paneModel, columnCounter, rowCounter);
 			listOfHotels.add(paneModel);
-			// her satýrda 7 otel
+			// her satï¿½rda 7 otel
 			if (columnCounter == 6) {
 				columnCounter = 0;
-				// satýr dolduðunda alt satýra geçiþ
+				// satï¿½r dolduï¿½unda alt satï¿½ra geï¿½iï¿½
 				rowCounter++;
 				gridPane.getRowConstraints().add(new RowConstraints(150));
 			} else {
@@ -93,7 +148,7 @@ public class GeneralManagerMainController implements Initializable {
 			// body text
 			PaneModel paneModel = listOfHotels.get(index);
 			paneModel.getChildren().addAll(text);
-			// otelin bilgileri Pane üzerinden aktarýlýr
+			// otelin bilgileri Pane ï¿½zerinden aktarï¿½lï¿½r
 			paneModel.idHotel = index;
 			paneModel.setOnMouseClicked(e -> {
 				// hotel details dialog

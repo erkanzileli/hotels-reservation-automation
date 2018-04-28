@@ -11,8 +11,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="870.0" style="-fx-background-color: #31263e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
  <children>
-      <TextField fx:id="memberName" focusTraversable="false" layoutX="344.0" layoutY="218.0" prefColumnCount="5" prefHeight="26.0" prefWidth="203.0" promptText="Kullanıcı Adı" />
-      <PasswordField fx:id="password" focusTraversable="false" layoutX="344.0" layoutY="269.0" prefHeight="26.0" prefWidth="203.0" promptText="Şifre" />
+      <TextField fx:id="memberName" focusTraversable="false" layoutX="344.0" layoutY="218.0" prefColumnCount="5" prefHeight="26.0" prefWidth="203.0" promptText="Kullanıcı Adı" text="erkanz" />
+      <PasswordField fx:id="password" focusTraversable="false" layoutX="344.0" layoutY="269.0" prefHeight="26.0" prefWidth="203.0" promptText="Şifre" text="erkan" />
     <ImageView fitHeight="72.0" fitWidth="74.0" layoutX="407.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/pictures/stumbleupon.png" />
