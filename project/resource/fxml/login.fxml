@@ -11,8 +11,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="870.0" style="-fx-background-color: #31263e;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
  <children>
-      <TextField fx:id="user_email" focusTraversable="false" layoutX="344.0" layoutY="218.0" prefHeight="26.0" prefWidth="203.0" promptText="Email Adresi" />
-      <PasswordField fx:id="user_password" focusTraversable="false" layoutX="344.0" layoutY="269.0" prefHeight="26.0" prefWidth="203.0" promptText="Şifre" />
+      <TextField fx:id="memberName" focusTraversable="false" layoutX="344.0" layoutY="218.0" prefColumnCount="5" prefHeight="26.0" prefWidth="203.0" promptText="Kullanıcı Adı" />
+      <PasswordField fx:id="password" focusTraversable="false" layoutX="344.0" layoutY="269.0" prefHeight="26.0" prefWidth="203.0" promptText="Şifre" />
     <ImageView fitHeight="72.0" fitWidth="74.0" layoutX="407.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/pictures/stumbleupon.png" />
@@ -38,16 +38,16 @@
             <Image url="@/pictures/lock.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="login" layoutX="344.0" layoutY="318.0" onAction="#hi" prefHeight="32.0" prefWidth="203.0" style="-fx-background-color: #ff910b;" text="Giriş" textFill="#38383c">
+      <JFXButton layoutX="344.0" layoutY="318.0" onAction="#login" prefHeight="32.0" prefWidth="203.0" style="-fx-background-color: #ff910b;" text="Giriş" textFill="#38383c">
          <font>
             <Font name="Courier New Bold" size="12.0" />
          </font></JFXButton>
-      <JFXButton fx:id="forget_password" layoutX="343.0" layoutY="363.0" onAction="#hi" prefHeight="32.0" prefWidth="203.0" style="-fx-background-color: #31263e;" text="Şifremi Unuttum" textFill="#ccccd4" underline="true">
+      <JFXButton layoutX="343.0" layoutY="363.0" onAction="#forgetPassword" prefHeight="32.0" prefWidth="203.0" style="-fx-background-color: #31263e;" text="Şifremi Unuttum" textFill="#ccccd4" underline="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="sign_up" layoutX="758.0" layoutY="18.0" onAction="#hi" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #271e33; -fx-border-color: #ff910b; -fx-background-radius: 2em; -fx-border-radius: 2em;" text="Kayıt Ol" textFill="#ccccd4">
+      <JFXButton layoutX="758.0" layoutY="18.0" onAction="#signUp" prefHeight="32.0" prefWidth="96.0" style="-fx-background-color: #271e33; -fx-border-color: #ff910b; -fx-background-radius: 2em; -fx-border-radius: 2em;" text="Kayıt Ol" textFill="#ccccd4">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

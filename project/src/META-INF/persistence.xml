@@ -10,12 +10,20 @@
 		<class>entity.LocalManager</class>
 		<class>entity.GeneralManager</class>
 		<class>entity.Person</class>
+		<class>entity.Adress</class>
+		<class>entity.Bed</class>
+		<class>entity.FeedBack</class>
+		<class>entity.Hotel</class>
+		<class>entity.InRoom</class>
+		<class>entity.Reservated</class>
+		<class>entity.Reservation</class>
+		<class>entity.Room</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/test?serverTimezone=UTC" />
+				value="jdbc:mysql://localhost:3306/ors?serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.password" value="123456" />
 			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="eclipselink.jdbc.native-sql" value="true" />

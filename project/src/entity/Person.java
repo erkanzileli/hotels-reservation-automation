@@ -28,6 +28,20 @@ public class Person {
 
 	private long phoneNumber;
 
+	public Person() {
+	}
+
+	public Person(long tc, int idAccount, String name, String surname, LocalDateTime registerDate,
+			LocalDateTime birthDate, long phoneNumber) {
+		this.tc = tc;
+		this.idAccount = idAccount;
+		this.name = name;
+		this.surname = surname;
+		this.registerDate = registerDate;
+		this.birthDate = birthDate;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public int getIdPerson() {
 		return idPerson;
 	}

@@ -1,7 +1,9 @@
 package main;
 
-import controller.LoginController;
-import controller.SignUpController;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +12,11 @@ import javafx.stage.Stage;
 
 public class MainClass extends Application {
 
+	public static EntityManager entityManager;
+
 	public static void main(String[] args) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysqlPersistenceUnit");
+		entityManager = emf.createEntityManager();
 		launch(args);
 	}
 
