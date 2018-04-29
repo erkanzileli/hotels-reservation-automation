@@ -8,8 +8,6 @@ import utility.EntityManagerUtility;
 
 public interface BaseDAO<T> {
 
-	EntityManager entityManager = EntityManagerUtility.getEntityManager();
-
 	void create(T t);
 
 	List<T> read();

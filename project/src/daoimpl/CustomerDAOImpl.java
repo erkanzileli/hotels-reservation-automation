@@ -2,12 +2,20 @@ package daoimpl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import dao.CustomerDAO;
 import entity.Customer;
+import utility.EntityManagerUtility;
 
 public class CustomerDAOImpl implements CustomerDAO {
+
+	EntityManager entityManager;
+
+	public CustomerDAOImpl() {
+		entityManager = EntityManagerUtility.createEntityManager();
+	}
 
 	@Override
 	public void create(Customer t) {

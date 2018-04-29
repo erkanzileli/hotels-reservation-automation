@@ -2,8 +2,6 @@ package entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -26,7 +24,7 @@ public class Employee {
 		this.tc = tc;
 		this.idHotel = idHotel;
 		this.idAccount = idAccount;
-		this.type = type;
+		this.setType(type);
 	}
 
 	public long getTc() {
@@ -51,6 +49,14 @@ public class Employee {
 
 	public void setIdAccount(int idAccount) {
 		this.idAccount = idAccount;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

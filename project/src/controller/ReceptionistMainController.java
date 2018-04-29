@@ -178,8 +178,8 @@ public class ReceptionistMainController implements Initializable {
 			PaneModel roomPaneModel = listOfRooms.get(index);
 			roomPaneModel.getChildren().addAll(text, content, description);
 			// odan�n bilgileri Pane �zerinden aktar�l�r
-			roomPaneModel.idRoom = index;
-			roomPaneModel.idHotel = index;
+			roomPaneModel.setIdRoom(index);
+			roomPaneModel.setIdHotel(index);
 			roomPaneModel.setOnMouseClicked(e -> {
 				// roomInfo dialog
 				loadRoomInfoDialog();

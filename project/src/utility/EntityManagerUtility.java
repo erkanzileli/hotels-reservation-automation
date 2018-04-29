@@ -6,12 +6,12 @@ import javax.persistence.Persistence;
 
 public class EntityManagerUtility {
 
-	static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistenceUnitName");
+	static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysqlPersistenceUnit");
 
 	private EntityManagerUtility() {
 	}
 
-	public static EntityManager getEntityManager() {
+	public static EntityManager createEntityManager() {
 		return entityManagerFactory.createEntityManager();
 	}
 

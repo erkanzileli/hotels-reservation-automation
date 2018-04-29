@@ -1,8 +1,6 @@
 package main;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import entity.Account;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,10 +9,9 @@ import javafx.stage.Stage;
 
 public class MainClass extends Application {
 
-	public static EntityManagerFactory entityManagerFactory;
-
+	public static Account account;
+	
 	public static void main(String[] args) {
-		entityManagerFactory = Persistence.createEntityManagerFactory("mysqlPersistenceUnit");
 		launch(args);
 	}
 

@@ -20,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import main.MainClass;
+import utility.EntityManagerUtility;
 
 public class LoginController implements Initializable {
 
@@ -33,7 +34,7 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		entityManager = MainClass.entityManagerFactory.createEntityManager();
+		entityManager = EntityManagerUtility.createEntityManager();
 	}
 
 	@FXML
@@ -58,12 +59,13 @@ public class LoginController implements Initializable {
 			alert.show();
 		} else {
 			Account user = result.get(0);
+			MainClass.account = user;
 			String type = user.getType();
 			if ("SYSTEMMANAGER".equals(type)) {
 				System.out.println("CreateSystemManagerPage");
 			} else if ("GENERALMANAGER".equals(type)) {
+				GeneralManagerMainController.generalManager.setIdAccount(user.getIdAccount());
 				loadFXML("GeneralManagerMain.fxml");
-				GeneralManagerMainController.idAccount = user.getIdAccount();
 			} else if ("LOCALMANAGER".equals(type)) {
 				loadFXML("LocalManagerMain.fxml");
 			} else if ("RECEPTIONIST".equals(type)) {

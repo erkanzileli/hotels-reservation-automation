@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialog.DialogTransition;
@@ -33,8 +32,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.MainClass;
 import model.PaneModel;
+import utility.EntityManagerUtility;
 
 public class GeneralManagerMainController implements Initializable {
 
@@ -51,18 +50,16 @@ public class GeneralManagerMainController implements Initializable {
 
 	private List<Hotel> hotels;
 
-	public static int idAccount;
-
-	private GeneralManager generalManager;
+	public static GeneralManager generalManager = new GeneralManager();
 
 	private EntityManager entityManager;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		entityManager = MainClass.entityManagerFactory.createEntityManager();
+		entityManager = EntityManagerUtility.createEntityManager();
 		getData();
-		// fillGridPane();
-		// setHotelPanes();
+		fillGridPane();
+		setHotelPanes();
 
 	}
 
@@ -96,9 +93,9 @@ public class GeneralManagerMainController implements Initializable {
 
 	private void getData() {
 		// SQL
-		Query query = entityManager.createNativeQuery("SELECT * FROM GeneralManager WHERE idAccount=1?",
+		Query query = entityManager.createNativeQuery("SELECT * FROM GeneralManager WHERE idAccount=?1",
 				GeneralManager.class);
-		query.setParameter(1, idAccount);
+		query.setParameter(1, generalManager.getIdAccount());
 		List<GeneralManager> gm = query.getResultList();
 		if (gm.isEmpty()) {
 			Alert alertNotFound = new Alert(AlertType.ERROR,
@@ -106,18 +103,19 @@ public class GeneralManagerMainController implements Initializable {
 			alertNotFound.headerTextProperty().set(null);
 			alertNotFound.setTitle("Hata");
 			alertNotFound.show();
-			// System.exit();
 		} else {
-			// generalManager = gm.get(0);
+			generalManager = gm.get(0);
+			query = entityManager.createNativeQuery("SELECT * FROM Hotel Where idCompany=?1 ORDER BY Hotel.name ASC",
+					Hotel.class);
+			query.setParameter(1, generalManager.getIdCompany());
+			hotels = query.getResultList();
 		}
 	}
 
 	private void fillGridPane() {
 		// SQL sorgusu sonucuna g�re listeye aktar�l�r
 		listOfHotels = new ArrayList<PaneModel>();
-
-		int listSize = data.size();
-
+		int listSize = hotels.size();
 		int columnCounter = 0;
 		int rowCounter = 0;
 
@@ -138,20 +136,24 @@ public class GeneralManagerMainController implements Initializable {
 	}
 
 	private void setHotelPanes() {
-		int listSize = data.size();
-		for (int index = 0; index < listSize; index++) {
+		int index = 0;
+		for (Hotel hotel : hotels) {
 			// header text
-			Label text = new Label(data.get(index));
+			Label text = new Label(hotel.getName());
 			text.setAlignment(Pos.CENTER);
 			text.setMinWidth(150);
-			text.setMinHeight(150);
-			// body text
-			PaneModel paneModel = listOfHotels.get(index);
-			paneModel.getChildren().addAll(text);
-			// otelin bilgileri Pane �zerinden aktar�l�r
-			paneModel.idHotel = index;
-			paneModel.setOnMouseClicked(e -> {
+			text.setMinHeight(100);
+			// body text adress vb.
+			PaneModel hotelPane = listOfHotels.get(index);
+			hotelPane.getChildren().addAll(text);
+			// otelin bilgileri Pane uzerinden aktarilir
+			hotelPane.setIdHotel(hotel.getIdHotel());
+			hotelPane.setIdCompany(hotel.getIdCompany());
+			hotelPane.setHotelName(hotel.getName());
+			// tiklanma olayi
+			hotelPane.setOnMouseClicked(e -> {
 				// hotel details dialog
+				HotelDetailsController.selectedHotel = hotelPane;
 				Parent dialogFXML = null;
 				try {
 					dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/HotelDetails.fxml"));
@@ -162,7 +164,9 @@ public class GeneralManagerMainController implements Initializable {
 				dialogLayout.setBody(dialogFXML);
 				JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.CENTER);
 				dialog.show();
+
 			});
+			index++;
 		}
 	}
 
