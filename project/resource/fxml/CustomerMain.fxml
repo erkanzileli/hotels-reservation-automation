@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerMainController">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerMainController">
    <children>
       <Label alignment="CENTER" layoutY="25.0" prefHeight="50.0" prefWidth="600.0" text="Zaman Aralığı Seçin">
          <font>
@@ -15,8 +15,12 @@
          </font>
       </Label>
       <JFXButton contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="525.0" layoutY="144.0" onAction="#search" prefHeight="50.0" />
-      <JFXDatePicker focusTraversable="false" layoutX="75.0" layoutY="150.0" promptText="Başlangıç" />
-      <JFXDatePicker focusTraversable="false" layoutX="300.0" layoutY="150.0" promptText="Bitiş" />
-      <FontAwesomeIconView glyphName="SEARCH" layoutX="518.0" layoutY="175.0" size="45" />
+      <JFXDatePicker fx:id="dateStart" focusTraversable="false" layoutX="75.0" layoutY="150.0" prefHeight="25.0" prefWidth="175.0" promptText="Başlangıç" />
+      <JFXDatePicker fx:id="dateEnd" focusTraversable="false" layoutX="300.0" layoutY="150.0" prefHeight="25.0" prefWidth="175.0" promptText="Bitiş" />
+      <JFXButton contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="500.0" layoutY="130.0" onAction="#search" prefHeight="25.0" prefWidth="50.0">
+         <graphic>
+            <FontAwesomeIconView glyphName="SEARCH" size="50" />
+         </graphic>
+      </JFXButton>
    </children>
 </Pane>

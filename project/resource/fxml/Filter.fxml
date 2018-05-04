@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" prefWidth="400.0" text="Filtre">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <JFXTextField focusTraversable="false" layoutX="100.0" layoutY="50.0" prefWidth="200.0" promptText="Otel Adı" />
+            <JFXTextField focusTraversable="false" layoutX="100.0" layoutY="100.0" prefWidth="200.0" promptText="Otel Markası" />
+            <JFXComboBox focusTraversable="false" layoutX="100.0" layoutY="150.0" prefWidth="200.0" promptText="İl" />
+            <JFXComboBox focusTraversable="false" layoutX="100.0" layoutY="200.0" prefWidth="200.0" promptText="İlçe" />
+            <JFXButton focusTraversable="false" layoutX="100.0" layoutY="250.0" prefWidth="200.0" style="-fx-background-color: #51e041;" text="Uygula" />
+         </children>
+      </Pane>
+   </children>
+</JFXDialogLayout>
