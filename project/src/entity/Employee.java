@@ -2,49 +2,61 @@ package entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Employee {
+
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long tc;
 
-	@Column(name = "firstname")
-	private String firstname;
+	private int idHotel;
 
-	@Column(name = "lastname")
-	private String lastname;
+	private int idAccount;
+
+	@Column(name = "EmployeeType")
+	private String type;
 
 	public Employee() {
 	}
 
-	public Employee(String firstname, String lastname) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public Employee(long tc, int idHotel, int idAccount, String type) {
+		this.tc = tc;
+		this.idHotel = idHotel;
+		this.idAccount = idAccount;
+		this.setType(type);
 	}
 
-	public int getId() {
-		return this.id;
+	public long getTc() {
+		return tc;
 	}
 
-	public String getFirstname() {
-		return this.firstname;
+	public void setTc(long tc) {
+		this.tc = tc;
 	}
 
-	public String getLastname() {
-		return this.lastname;
+	public int getIdHotel() {
+		return idHotel;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setIdHotel(int idHotel) {
+		this.idHotel = idHotel;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public int getIdAccount() {
+		return idAccount;
+	}
+
+	public void setIdAccount(int idAccount) {
+		this.idAccount = idAccount;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

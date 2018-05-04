@@ -1,0 +1,7 @@
+package model;
+
+public enum Accounts {
+
+	CUSTOMER, RECEPTIONIST, LOCALMANAGER, GENERALMANAGER, SYSTEMMANAGER;
+
+}

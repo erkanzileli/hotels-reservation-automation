@@ -4,9 +4,13 @@ import javafx.scene.layout.Pane;
 
 public class PaneModel extends Pane {
 
-	public int idRoom;
+	private int idRoom;
 
-	public int idHotel;
+	private int idCompany;
+
+	private int idHotel;
+
+	private String hotelName;
 
 	public PaneModel() {
 	}
@@ -25,6 +29,22 @@ public class PaneModel extends Pane {
 
 	public void setIdHotel(int idHotel) {
 		this.idHotel = idHotel;
+	}
+
+	public int getIdCompany() {
+		return idCompany;
+	}
+
+	public void setIdCompany(int idCompany) {
+		this.idCompany = idCompany;
+	}
+
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
 	}
 
 }

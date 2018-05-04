@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HotelDetailsController">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -23,23 +23,23 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="İl" text="İstanbul" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="İlçe" text="Sarıyer" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="175.0" prefHeight="25.0" prefWidth="150.0" promptText="İsim" text="Divan-Sarıyer" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Puan" text="4.4" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Oda Sayısı" text="60" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="325.0" prefHeight="25.0" prefWidth="150.0" promptText="Yatak Sayısı" text="90" />
+            <JFXTextField fx:id="txtProvince" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="İl" text="İstanbul" />
+            <JFXTextField fx:id="txtDistrict" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="İlçe" text="Sarıyer" />
+            <JFXTextField fx:id="txtName" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="175.0" prefHeight="25.0" prefWidth="150.0" promptText="İsim" text="Divan-Sarıyer" />
+            <JFXTextField fx:id="txtPoint" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Puan" text="4.4" />
+            <JFXTextField fx:id="txtRoomCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Oda Sayısı" text="60" />
+            <JFXTextField fx:id="txtBedCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="325.0" prefHeight="25.0" prefWidth="150.0" promptText="Yatak Sayısı" text="90" />
             <Label layoutX="225.0" layoutY="15.0" text="İş Yeri Bilgileri">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Çalışan Sayısı" text="18" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Resepsiyonist Sayısı" text="4" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Temizlikçi Sayısı" text="13" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Müdür Adı Soyadı" text="Erkan ZİLELİ" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="225.0" prefHeight="25.0" prefWidth="125.0" promptText="Müdür Kullanıcı Adı" text="mudurmudurmudur" />
-            <JFXButton focusTraversable="false" layoutX="425.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3dff6c;" text="Müdür Değiştir" />
+            <JFXTextField fx:id="txtEmployeeCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Çalışan Sayısı" text="18" />
+            <JFXTextField fx:id="txtReceptionistCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Resepsiyonist Sayısı" text="4" />
+            <JFXTextField fx:id="txtCleanerCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="Temizlikçi Sayısı" text="13" />
+            <JFXTextField fx:id="txtManagerName" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Adı Soyadı" text="Erkan ZİLELİ" />
+            <JFXTextField fx:id="txtManagerMemberName" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="225.0" prefHeight="25.0" prefWidth="125.0" promptText="Kullanıcı Adı" text="mudurmudurmudur" />
+            <JFXButton focusTraversable="false" layoutX="425.0" layoutY="275.0" onAction="#changeManager" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3dff6c;" text="Müdür Değiştir" />
             <Label layoutX="225.0" layoutY="175.0" text="Müdür Bilgileri">
                <font>
                   <Font size="24.0" />
@@ -50,8 +50,8 @@
                   <FontAwesomeIconView glyphName="SEARCH" />
                </graphic>
             </JFXButton>
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Müdür T.C." text="01234567890" />
-            <JFXTextField editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Müdür Sayısı" text="1" />
+            <JFXTextField fx:id="txtManagerTC" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="T.C." text="01234567890" />
+            <JFXTextField fx:id="txtManagerCount" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="425.0" layoutY="125.0" prefHeight="25.0" prefWidth="150.0" promptText="Müdür Sayısı" text="1" />
          </children>
       </Pane>
    </children>

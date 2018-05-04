@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,12 +15,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class LocalManagerMainController implements Initializable {
 
@@ -79,6 +86,34 @@ public class LocalManagerMainController implements Initializable {
 		dialog.show();
 	}
 
+	@FXML
+	public void logout() {
+		ButtonType cancelButton = new ButtonType("İptal", ButtonData.NO);
+		ButtonType logoutButton = new ButtonType("Çıkış Yap", ButtonData.YES);
+		Alert logoutAlert = new Alert(AlertType.CONFIRMATION, "Çıkış yapmak istiyor musunuz?", cancelButton,
+				logoutButton);
+		logoutAlert.headerTextProperty().set(null);
+		logoutAlert.setTitle("Çıkış yapılıyor!");
+		Optional<ButtonType> result = logoutAlert.showAndWait();
+		result.ifPresent(buttonData -> {
+			if (buttonData.getButtonData() == ButtonData.YES) {
+				root.getScene().getWindow().hide();
+				Stage stage = new Stage();
+				Parent root = null;
+				try {
+					root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				stage.setScene(new Scene(root));
+				stage.setTitle("Login");
+				stage.setResizable(false);
+				stage.show();
+			}
+		});
+	}
+	
 	@FXML
 	void loadCreateRoomDialog() {
 		Parent dialogFXML = null;
