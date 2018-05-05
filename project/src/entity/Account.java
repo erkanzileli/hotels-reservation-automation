@@ -1,49 +1,40 @@
 package entity;
 
-import java.time.LocalDateTime;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "Account")
 public class Account {
 
 	@Id
+	@Column(name = "idAccount")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idAccount;
 
-	private LocalDateTime registerDate;
-
+	@Column(name = "firstname")
 	private String firstname;
 
+	@Column(name = "lastname")
 	private String lastname;
 
-	private long phoneNumber;
-
-	private long tc;
-
+	@Column(name = "memberName")
 	private String memberName;
 
+	@Column(name = "password")
 	private String password;
 
+	@Column(name = "type")
 	private String type;
-
-	private LocalDateTime birthDate;
 
 	public Account() {
 	}
 
-	public Account(String firstname, String lastname, long phoneNumber, long tc, LocalDateTime birthDate, String memberName, String password,
-			String type) {
+	public Account(String firstname, String lastname, String memberName, String password, String type) {
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.phoneNumber = phoneNumber;
-		this.tc = tc;
-		this.setBirthDate(birthDate);
 		this.memberName = memberName;
 		this.password = password;
 		this.type = type;
@@ -95,38 +86,6 @@ public class Account {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
-	}
-
-	public long getTc() {
-		return tc;
-	}
-
-	public void setTc(long tc) {
-		this.tc = tc;
-	}
-
-	public long getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public LocalDateTime getRegisterDate() {
-		return registerDate;
-	}
-
-	public void setRegisterDate(LocalDateTime registerDate) {
-		this.registerDate = registerDate;
-	}
-
-	public LocalDateTime getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDateTime birthDate) {
-		this.birthDate = birthDate;
 	}
 
 }

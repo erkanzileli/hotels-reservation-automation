@@ -1,5 +1,6 @@
 package entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,12 +8,16 @@ import javax.persistence.Id;
 public class LocalManager {
 
 	@Id
+	@Column(name = "tc")
 	private long tc;
 
+	@Column(name = "idAccount")
 	private int idAccount;
 
+	@Column(name = "idHotel")
 	private int idHotel;
 
+	@Column(name = "idCompany")
 	private int idCompany;
 
 	public LocalManager() {

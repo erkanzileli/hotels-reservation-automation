@@ -7,10 +7,11 @@ import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import entity.Account;
-import entity.Adress;
+import entity.Address;
 import entity.Employee;
 import entity.LocalManager;
 import javafx.fxml.FXML;
@@ -57,7 +58,13 @@ public class HotelDetailsController implements Initializable {
 	private JFXTextField txtManagerTC;
 
 	@FXML
-	private JFXTextField txtManagerCount;
+	private JFXTextField txtManagerSurname;
+
+	@FXML
+	private JFXPasswordField txtPassword;
+
+	@FXML
+	private JFXPasswordField txtPasswordAgain;
 
 	public static PaneModel selectedHotel;
 
@@ -66,46 +73,93 @@ public class HotelDetailsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		entityManager = EntityManagerUtility.createEntityManager();
-		// adres bilgilerinin cekilmesi
-		Query query = entityManager.createNativeQuery("SELECT * FROM Adress WHERE idHotel=?1", Adress.class);
-		query.setParameter(1, selectedHotel.getIdHotel());
-		Adress hotelAdress = (Adress) query.getSingleResult();
-		// mudur bilgilerinin cekilmesi
-		query = entityManager.createNativeQuery("SELECT * FROM LocalManager WHERE idHotel=?1", LocalManager.class);
-		query.setParameter(1, selectedHotel.getIdHotel());
-		LocalManager hotelLocalManager = (LocalManager) query.getSingleResult();
+		Address address = getAddress(selectedHotel.getIdHotel());
+		int roomCount = getRoomCount();
+		int bedCount = getBedCount();
+		int[] employees = getEmployeeCount();
 
-		query = entityManager.createNativeQuery("SELECT * FROM Account WHERE idAccount=?1", Account.class);
-		query.setParameter(1, hotelLocalManager.getIdAccount());
-		Account localManagerAccount = (Account) query.getSingleResult();
-		//oda sayilarinin hesaplanmasi
-		query=entityManager.createNativeQuery("SELECT COUNT(*) FROM Room WHERE idHotel=?1");
-		query.setParameter(1, selectedHotel.getIdHotel());
-		String roomCount = (String) query.getSingleResult();
-		// yatak sayisinin hesaplanmasi
-		query = entityManager.createNativeQuery("SELECT COUNT(*) FROM Bed WHERE idHotel=?1");
-		//String bedCount = (String) query.getSingleResult();
-		// calisan saylarinin hesaplanmasi
-		query = entityManager.createNativeQuery("SELECT * FROM Employee WHERE idHotel=?1", Employee.class);
-		query.setParameter(1, selectedHotel.getIdHotel());
-		List<Employee> employees = query.getResultList();
-		int receptionistCount = 0;
-		int employeeCount = 0;
-		int cleanerCount = 0;
-		int totalEmployeeCount;
-		if (!employees.isEmpty()) {
-			for (Employee employee : employees) {
-				if (employee.getType() == "RECEPTIONIST")
-					receptionistCount++;
-				if (employee.getType() == "CLEANER")
-					cleanerCount++;
-				if (employee.getType() == "EMPLOYEE")
-					employeeCount++;
-			}
-			totalEmployeeCount = employees.size();
+		// kutucuklarin doldurulmasi
+		txtName.setText(selectedHotel.getHotelName());
+		txtProvince.setText(address.getProvince());
+		txtDistrict.setText(address.getDistrict());
+		txtRoomCount.setText(String.valueOf(roomCount));
+		txtBedCount.setText(String.valueOf(bedCount));
+		txtReceptionistCount.setText(String.valueOf(employees[0]));
+		txtCleanerCount.setText(String.valueOf(employees[1]));
+		txtEmployeeCount.setText(String.valueOf(employees[2]));
+		// mudur var ise
+		LocalManager localManager = getLocalManager();
+		if (localManager != null) {
+			Account localManagerAccount = getLocalManagerAccount(localManager.getIdAccount());
+			txtManagerMemberName.setText(localManagerAccount.getMemberName());
+			txtManagerName.setText(localManagerAccount.getFirstname());
+			txtManagerSurname.setText(localManagerAccount.getLastname());
+			txtManagerTC.setText(String.valueOf(localManager.getTc()));
 		}
-		// textfield'lara yazma
-		
+
+	}
+
+	private int[] getEmployeeCount() {
+		// calisan saylarinin hesaplanmasi
+		int[] employees = new int[3];
+		Query query = entityManager.createNativeQuery("SELECT * FROM Employee WHERE idHotel=?1", Employee.class);
+		query.setParameter(1, selectedHotel.getIdHotel());
+		List<Employee> result = query.getResultList();
+		if (!result.isEmpty()) {
+			for (Employee employee : result) {
+				if (employee.getType() == "RECEPTIONIST")
+					employees[0]++;
+				if (employee.getType() == "CLEANER")
+					employees[1]++;
+			}
+			employees[3] = employees[0] + employees[1];
+		}
+		return employees;
+	}
+
+	private int getBedCount() {
+		// yatak sayisinin hesaplanmasi
+		Query query = entityManager.createNativeQuery(
+				"select count(idBed) as bedCount from bed INNER JOIN room r ON bed.idRoom = r.idRoom where idHotel=?1;");
+		query.setParameter(1, selectedHotel.getIdHotel());
+		return query.getFirstResult();
+	}
+
+	private int getRoomCount() {
+		// oda sayilarinin hesaplanmasi
+		Query query = entityManager.createNativeQuery("SELECT COUNT(idRoom) FROM Room WHERE idHotel=?1");
+		query.setParameter(1, selectedHotel.getIdHotel());
+		return query.getFirstResult();
+	}
+
+	private Account getLocalManagerAccount(int idAccount) {
+		Query query = entityManager.createNativeQuery("SELECT * FROM Account WHERE idAccount=?1", Account.class);
+		query.setParameter(1, idAccount);
+		if (!query.getResultList().isEmpty())
+			return (Account) query.getResultList().get(0);
+		else
+			return null;
+	}
+
+	private LocalManager getLocalManager() {
+		// mudur bilgilerinin cekilmesi
+		Query query = entityManager.createNativeQuery("SELECT * FROM LocalManager WHERE idHotel=?1",
+				LocalManager.class);
+		query.setParameter(1, selectedHotel.getIdHotel());
+		if (!query.getResultList().isEmpty())
+			return (LocalManager) query.getResultList().get(0);
+		else
+			return null;
+	}
+
+	private Address getAddress(int idHotel) {
+		// adres bilgilerinin cekilmesi
+		Query query = entityManager.createNativeQuery("SELECT * FROM Address WHERE idHotel=?1", Address.class);
+		query.setParameter(1, idHotel);
+		if (!query.getResultList().isEmpty())
+			return (Address) query.getResultList().get(0);
+		else
+			return null;
 	}
 
 	@FXML

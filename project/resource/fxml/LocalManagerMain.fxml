@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
@@ -23,7 +23,7 @@
                   <MaterialDesignIconView glyphName="POWER" size="25" />
                </graphic>
             </JFXButton>
-				<Label alignment="CENTER" layoutX="25.0" layoutY="50.0" text="Odalar" textFill="WHITE" textOverrun="CLIP">
+				<Label alignment="CENTER" layoutX="475.0" layoutY="50.0" text="Odalar" textFill="WHITE" textOverrun="CLIP">
 					<font>
 						<Font size="28.0" />
 					</font>
@@ -31,7 +31,7 @@
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Label>
-				<Label alignment="CENTER" layoutX="575.0" layoutY="50.0" text="Çalışanlar" textFill="WHITE" textOverrun="CLIP">
+				<Label alignment="CENTER" layoutX="25.0" layoutY="50.0" text="Çalışanlar" textFill="WHITE" textOverrun="CLIP">
 					<font>
 						<Font size="28.0" />
 					</font>
@@ -39,7 +39,7 @@
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Label>
-				<JFXButton focusTraversable="false" graphicTextGap="10.0" layoutX="750.0" layoutY="75.0" onAction="#loadCreateEmployeeDialog" prefHeight="25.0" style="-fx-background-color: white;" text="Çalışan">
+				<JFXButton focusTraversable="false" graphicTextGap="10.0" layoutX="300.0" layoutY="75.0" onAction="#loadCreateEmployeeDialog" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: white;" text="Çalışan">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -47,7 +47,7 @@
 						<FontAwesomeIconView glyphName="PLUS" size="20" />
 					</graphic>
 				</JFXButton>
-				<JFXButton focusTraversable="false" graphicTextGap="10.0" layoutX="150.0" layoutY="75.0" onAction="#loadCreateRoomDialog" prefHeight="25.0" style="-fx-background-color: white;" text="Oda">
+				<JFXButton focusTraversable="false" graphicTextGap="10.0" layoutX="850.0" layoutY="75.0" onAction="#loadCreateRoomDialog" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: white;" text="Oda">
 					<font>
 						<Font size="20.0" />
 					</font>
@@ -65,24 +65,23 @@
 				</JFXButton>
 				<Pane fx:id="pane" layoutX="25.0" layoutY="125.0" prefHeight="550.0" prefWidth="1050.0">
                <children>
-                  <JFXTreeTableView fx:id="tableRoom" prefHeight="550.0" prefWidth="500.0">
-                     <columns>
-                        <TreeTableColumn fx:id="columnRoomNumber" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Oda Numarası" />
-                        <TreeTableColumn fx:id="columnRoomStatus" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Oda Durumu" />
-                        <TreeTableColumn fx:id="columnRoomType" maxWidth="250.0" minWidth="50.0" prefWidth="75.0" text="Oda Tipi" />
-                        <TreeTableColumn fx:id="columnRoomPhone" maxWidth="250.0" minWidth="75.0" prefWidth="125.0" text="Telefon Numarası" />
-                        <TreeTableColumn fx:id="columnRoomBedCount" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Yatak Sayısı" />
-                     </columns>
-                  </JFXTreeTableView>
-                  <JFXTreeTableView fx:id="tableEmployee" layoutX="550.0" prefHeight="550.0" prefWidth="500.0">
-                     <columns>
-                        <TreeTableColumn fx:id="columnEmployeeName" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Adı" />
-                        <TreeTableColumn fx:id="columnEmployeeSurname" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Soyadı" />
-                        <TreeTableColumn fx:id="columnEmployeePosition" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Pozisyon" />
-                        <TreeTableColumn fx:id="columnEmployeeTC" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="T.C." />
-                        <TreeTableColumn fx:id="columnEmployeeMemberName" maxWidth="250.0" minWidth="50.0" prefWidth="100.0" text="Kullanıcı Adı" />
-                     </columns>
-                  </JFXTreeTableView>
+                  <TableView fx:id="tableEmployees" prefHeight="550.0" prefWidth="400.0">
+                    <columns>
+                        <TableColumn fx:id="columnEmployeeName" prefWidth="100.0" text="Ad" />
+                      <TableColumn fx:id="columnEmployeeSurname" prefWidth="100.0" text="Soyad" />
+                      <TableColumn fx:id="columnEmployeePosition" prefWidth="100.0" text="Pozisyon" />
+                        <TableColumn fx:id="columnEmployeeTC" prefWidth="100.0" text="T.C." />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tableRoom" layoutX="450.0" prefHeight="550.0" prefWidth="600.0">
+                    <columns>
+                      <TableColumn fx:id="columnRoomNumber" prefWidth="100.0" text="Oda Numarası" />
+                      <TableColumn fx:id="columnRoomStatus" prefWidth="125.0" text="Oda Durumu" />
+                        <TableColumn fx:id="columnRoomType" prefWidth="125.0" text="Oda Tipi" />
+                        <TableColumn fx:id="columnRoonPhone" prefWidth="150.0" text="Telefon Numarası" />
+                        <TableColumn fx:id="columnBedCount" prefWidth="100.0" text="Yatak Sayısı" />
+                    </columns>
+                  </TableView>
                </children></Pane>
 			</children>
 		</Pane>

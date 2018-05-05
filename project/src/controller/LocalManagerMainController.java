@@ -2,31 +2,40 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.JFXDialog.DialogTransition;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import entity.Account;
+import entity.Employee;
+import entity.LocalManager;
+import entity.Room;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import main.MainClass;
+import model.RoomTableModel;
+import utility.EntityManagerUtility;
 
 public class LocalManagerMainController implements Initializable {
 
@@ -37,40 +46,152 @@ public class LocalManagerMainController implements Initializable {
 	private Pane pane;
 
 	@FXML
-	private JFXTreeTableView<?> tableRoom;
+	private TableView<Employee> tableEmployees;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnRoomNumber;
+	private TableColumn<?, ?> columnEmployeeName;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnRoomStatus;
+	private TableColumn<?, ?> columnEmployeeSurname;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnRoomType;
+	private TableColumn<?, ?> columnEmployeePosition;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnRoomPhone;
+	private TableColumn<?, ?> columnEmployeeTC;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnRoomBedCount;
+	private TableView<RoomTableModel> tableRoom;
 
 	@FXML
-	private JFXTreeTableView<?> tableEmployee;
+	private TableColumn<?, ?> columnRoomNumber;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnEmployeeName;
+	private TableColumn<?, ?> columnRoomStatus;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnEmployeeSurname;
+	private TableColumn<?, ?> columnRoomType;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnEmployeePosition;
+	private TableColumn<?, ?> columnRoonPhone;
 
 	@FXML
-	private TreeTableColumn<?, ?> columnEmployeeTC;
+	private TableColumn<?, ?> columnBedCount;
 
-	@FXML
-	private TreeTableColumn<?, ?> columnEmployeeMemberName;
+	private EntityManager entityManager;
+
+	public static LocalManager thisLocalManager;
+
+	private List<Employee> employees;
+
+	private List<RoomTableModel> rooms;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		entityManager = EntityManagerUtility.createEntityManager();
+
+		employees = new ArrayList<>();
+		rooms = new ArrayList<>();
+
+		getLocalManagerAccount();
+		getEmployees();
+		getRooms();
+
+		columnEmployeeName.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+		columnEmployeeSurname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+		columnEmployeePosition.setCellValueFactory(new PropertyValueFactory<>("type"));
+		columnEmployeeTC.setCellValueFactory(new PropertyValueFactory<>("tc"));
+
+		tableEmployees.getItems().setAll(employees);
+		tableEmployees.setOnMouseClicked(e -> {
+			if (e.getClickCount() == 2) {
+				ButtonType cancelButton = new ButtonType("Ýptal", ButtonData.CANCEL_CLOSE);
+				ButtonType okButton = new ButtonType("Sil", ButtonData.OK_DONE);
+				Alert alert = new Alert(AlertType.CONFIRMATION, "Bu çalýþaný silmek istiyor musunuz?", cancelButton,
+						okButton);
+				alert.headerTextProperty().set(null);
+				alert.setTitle("Bir çalýþan siliniyor!");
+				Optional<ButtonType> result = alert.showAndWait();
+				result.ifPresent(buttonData -> {
+					if (buttonData.getButtonData() == ButtonData.OK_DONE) {
+						Employee selectedEmployee = tableEmployees.getSelectionModel().getSelectedItem();
+						if (selectedEmployee.getType().equals("RECEPTIONIST")) {
+							Employee employee = entityManager.find(Employee.class, selectedEmployee.getTc());
+							Account employeeAccunt = entityManager.find(Account.class, employee.getIdAccount());
+							entityManager.getTransaction().begin();
+							entityManager.remove(employee);
+							entityManager.remove(employeeAccunt);
+							entityManager.getTransaction().commit();
+							refreshHome();
+						} else {
+							Employee employee = entityManager.find(Employee.class, selectedEmployee.getTc());
+							entityManager.getTransaction().begin();
+							entityManager.remove(employee);
+							entityManager.getTransaction().commit();
+							refreshHome();
+						}
+					}
+				});
+			}
+		});
+
+		columnRoomNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+		columnRoomStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+		columnRoomType.setCellValueFactory(new PropertyValueFactory<>("type"));
+		columnRoonPhone.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+		columnBedCount.setCellValueFactory(new PropertyValueFactory<>("bedCount"));
+
+		tableRoom.getItems().setAll(rooms);
+		tableRoom.setOnMouseClicked(e->{
+			if(e.getClickCount()==2) {
+				
+			}
+		});
+	}
+
+	private void refreshHome() {
+		root.getScene().getWindow().hide();
+		Stage stage = new Stage();
+		Parent root = null;
+		try {
+			root = FXMLLoader.load(getClass().getResource("/fxml/LocalManagerMain.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		stage.setScene(new Scene(root));
+		stage.setTitle("Anasayfa");
+		stage.setResizable(false);
+		stage.show();
+	}
+
+	private void getRooms() {
+		Query query = entityManager.createNativeQuery("SELECT * FROM Room WHERE idHotel=?1", Room.class);
+		query.setParameter(1, thisLocalManager.getIdHotel());
+		List<Room> result = query.getResultList();
+		if (!result.isEmpty()) {
+			rooms = new ArrayList<>();
+			result.forEach(r -> {
+				Query query1 = entityManager.createNativeQuery("select idBed from bed where idRoom=?1");
+				query1.setParameter(1, r.getIdRoom());
+				int bedCount = 0;
+				bedCount = query1.getResultList().size();
+				rooms.add(new RoomTableModel(r.getIdHotel(), r.getType(), r.getNumber(), r.getPhoneNumber(), r.getStatus(), bedCount));
+			});
+		}
+	}
+
+	private void getEmployees() {
+		Query query = entityManager.createNativeQuery("SELECT * FROM Employee WHERE idHotel=?1", Employee.class);
+		query.setParameter(1, thisLocalManager.getIdHotel());
+		this.employees = query.getResultList();
+	}
+
+	private void getLocalManagerAccount() {
+		Query query = entityManager.createNativeQuery("Select * from LocalManager where idAccount=?1",
+				LocalManager.class);
+		query.setParameter(1, MainClass.account.getIdAccount());
+		thisLocalManager = (LocalManager) query.getResultList().get(0);
+	}
 
 	@FXML
 	void loadCreateEmployeeDialog() {
@@ -82,7 +203,7 @@ public class LocalManagerMainController implements Initializable {
 		}
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
 		dialogLayout.setBody(dialogFXML);
-		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.RIGHT);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.LEFT);
 		dialog.show();
 	}
 
@@ -113,7 +234,7 @@ public class LocalManagerMainController implements Initializable {
 			}
 		});
 	}
-	
+
 	@FXML
 	void loadCreateRoomDialog() {
 		Parent dialogFXML = null;
@@ -124,7 +245,7 @@ public class LocalManagerMainController implements Initializable {
 		}
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
 		dialogLayout.setBody(dialogFXML);
-		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.LEFT);
+		JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.RIGHT);
 		dialog.show();
 	}
 
@@ -142,9 +263,4 @@ public class LocalManagerMainController implements Initializable {
 		dialog.show();
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
-	}
 }

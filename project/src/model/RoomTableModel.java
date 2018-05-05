@@ -1,15 +1,7 @@
-package entity;
+package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class RoomTableModel {
 
-@Entity
-public class Room {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idRoom;
 
 	private int idHotel;
@@ -22,15 +14,18 @@ public class Room {
 
 	private String status;
 
-	public Room() {
+	private int bedCount;
+
+	public RoomTableModel() {
 	}
 
-	public Room(int idHotel, String type, int number, long phoneNumber, String status) {
+	public RoomTableModel(int idHotel, String type, int number, long phoneNumber, String status, int bedCount) {
 		this.idHotel = idHotel;
 		this.type = type;
 		this.number = number;
 		this.phoneNumber = phoneNumber;
 		this.status = status;
+		this.bedCount = bedCount;
 	}
 
 	public int getIdRoom() {
@@ -80,4 +75,13 @@ public class Room {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public int getBedCount() {
+		return bedCount;
+	}
+
+	public void setBedCount(int bedCount) {
+		this.bedCount = bedCount;
+	}
+
 }

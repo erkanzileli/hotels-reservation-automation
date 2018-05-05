@@ -53,7 +53,7 @@ public class LoginController implements Initializable {
 		query.setParameter(2, passwd);
 		List<Account> result = query.getResultList();
 		if (result.isEmpty()) {
-			Alert alert = new Alert(AlertType.ERROR, "BÃ¶yle bir kullanÄ±cÄ± bulunamadÄ±");
+			Alert alert = new Alert(AlertType.ERROR, "Böyle bir kullanýcý bulunamadý");
 			alert.headerTextProperty().set(null);
 			alert.titleProperty().set("Hata");
 			alert.show();
@@ -74,7 +74,7 @@ public class LoginController implements Initializable {
 				loadFXML("CustomerMain.fxml");
 			} else {
 				Alert alertNotFound = new Alert(AlertType.ERROR,
-						"Bilinmeyen bir hata oluÅŸtu. SaÄŸlayÄ±cÄ±nÄ±z ile iletiÅŸime geÃ§iniz");
+						"Bilinmeyen bir hata oluþtu. Saðlayýcýnýz ile iletiþime geçiniz");
 				alertNotFound.headerTextProperty().set(null);
 				alertNotFound.setTitle("Hata");
 				alertNotFound.show();

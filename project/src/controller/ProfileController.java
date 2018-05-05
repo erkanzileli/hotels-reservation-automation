@@ -54,8 +54,6 @@ public class ProfileController implements Initializable {
 		Account account = MainClass.account;
 		txtName.setText(account.getFirstname());
 		txtSurname.setText(account.getLastname());
-		txtBirthDate.setValue(account.getBirthDate().toLocalDate());
-		txtPhoneNumber.setText(String.valueOf(account.getPhoneNumber()));
 	}
 
 	@FXML

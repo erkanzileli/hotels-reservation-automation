@@ -65,12 +65,12 @@ public class GeneralManagerMainController implements Initializable {
 
 	@FXML
 	public void logout() {
-		ButtonType cancelButton = new ButtonType("Ä°ptal", ButtonData.NO);
-		ButtonType logoutButton = new ButtonType("Ã‡Ä±kÄ±ÅŸ Yap", ButtonData.YES);
-		Alert logoutAlert = new Alert(AlertType.CONFIRMATION, "Ã‡Ä±kÄ±ÅŸ yapmak istiyor musunuz?", cancelButton,
+		ButtonType cancelButton = new ButtonType("Ýptal", ButtonData.NO);
+		ButtonType logoutButton = new ButtonType("Çýkýþ Yap", ButtonData.YES);
+		Alert logoutAlert = new Alert(AlertType.CONFIRMATION, "Çýkýþ yapmak istiyor musunuz?", cancelButton,
 				logoutButton);
 		logoutAlert.headerTextProperty().set(null);
-		logoutAlert.setTitle("Ã‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor!");
+		logoutAlert.setTitle("Çýkýþ yapýlýyor!");
 		Optional<ButtonType> result = logoutAlert.showAndWait();
 		result.ifPresent(buttonData -> {
 			if (buttonData.getButtonData() == ButtonData.YES) {
