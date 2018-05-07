@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
+import entity.Customer;
+import entity.Person;
+import entity.Reservation;
+import entity.Room;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -27,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import main.MainClass;
 import model.CustomerResultListModel;
 import model.PersonTableModel;
 import model.RoomListModel;
@@ -76,6 +84,9 @@ public class CreateReservationController implements Initializable {
 	@FXML
 	private TableColumn<?, ?> columnPersonBirth;
 
+	@FXML
+	private JFXDatePicker dateStart;
+
 	private EntityManager entityManager;
 
 	public static RoomListModel selected;
@@ -106,10 +117,11 @@ public class CreateReservationController implements Initializable {
 
 	@FXML
 	void addPerson() {
-		if (persons.size() == selected.getCapacity()) {
+		if (persons.size() < selected.getCapacity()) {
 			Dialog dialog = new Dialog<>();
 			DialogPane dialogPane = new DialogPane();
 			Pane pane = new Pane();
+			dialog.setTitle("Odada kalacak kiþi kaydý.");
 			Label tc = new Label("T.C.");
 			tc.setLayoutX(15);
 			tc.setLayoutY(15);
@@ -122,7 +134,7 @@ public class CreateReservationController implements Initializable {
 			surname.setLayoutX(15);
 			surname.setLayoutY(95);
 
-			Label birth = new Label("Doðum Tarihi");
+			Label birth = new Label("Doðum T.");
 			birth.setLayoutX(15);
 			birth.setLayoutY(135);
 
@@ -141,6 +153,7 @@ public class CreateReservationController implements Initializable {
 			DatePicker dateBirth = new DatePicker();
 			dateBirth.setLayoutX(75);
 			dateBirth.setLayoutY(135);
+			dateBirth.setPrefWidth(150);
 
 			ButtonType cancelButton = new ButtonType("Ýptal", ButtonData.CANCEL_CLOSE);
 			ButtonType okButton = new ButtonType("Ekle", ButtonData.OK_DONE);
@@ -180,11 +193,46 @@ public class CreateReservationController implements Initializable {
 	@FXML
 	void save() {
 		if (persons.size() > 0) {
-			
+			if (dateStart.getValue() != null) {
+				Query query = entityManager.createNativeQuery("select * from customer where idAccount=?1",
+						Customer.class);
+				query.setParameter(1, MainClass.account.getIdAccount());
+				Customer customer = (Customer) query.getResultList().get(0);
+				query = entityManager.createNativeQuery(
+						"insert into reservation(startDate,tcCustomer,idHotel,amount,idRoom) values(?1,?2,?3,?4,?5)");
+				query.setParameter(1, dateStart.getValue());
+				query.setParameter(2, customer.getTc());
+				query.setParameter(3, selectedResultModel.getIdHotel());
+				query.setParameter(4, selected.getAmount());
+				query.setParameter(5, selected.getIdRoom());
+
+				Reservation reservation = new Reservation(selectedResultModel.getIdHotel(), selected.getIdRoom(),
+						dateStart.getValue(), selected.getAmount(), customer.getTc());
+				entityManager.getTransaction().begin();
+				entityManager.persist(reservation);
+				entityManager.getTransaction().commit();
+				entityManager.getTransaction().begin();
+				persons.forEach(person -> {
+					Person newPerson = new Person(person.getTc(), person.getName(), person.getSurname(),
+							person.getBirth(), reservation.getIdReservation(), Date.valueOf(dateStart.getValue()),
+							Date.valueOf(dateStart.getValue().minusDays(1)));
+					entityManager.persist(newPerson);
+				});
+				Room room = entityManager.find(Room.class, selected.getIdRoom());
+				room.setStatus("Rezerve-Edildi");
+				entityManager.getTransaction().commit();
+
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Hata");
+				alert.setHeaderText("Tarih seçin.");
+				alert.setContentText(null);
+				alert.show();
+			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Hata");
-			alert.setHeaderText("Odada en az bir kiþi kalmalý.");
+			alert.setHeaderText("Odada en az bir kiþi kalmalýdýr.");
 			alert.setContentText(null);
 			alert.show();
 		}

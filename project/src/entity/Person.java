@@ -1,7 +1,9 @@
 package entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,35 +13,41 @@ import javax.persistence.Id;
 public class Person {
 
 	@Id
+	@Column(name = "idPerson")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPerson;
 
+	@Column(name = "tc")
 	private long tc;
 
-	private int idAccount;
-
+	@Column(name = "name")
 	private String name;
 
+	@Column(name = "surname")
 	private String surname;
 
-	private LocalDateTime registerDate;
+	@Column(name = "birthDate")
+	private LocalDate birthDate;
 
-	private LocalDateTime birthDate;
+	@Column(name = "idReservation")
+	private int idReservation;
 
-	private long phoneNumber;
+	private Date entryDate;
+
+	private Date outDate;
 
 	public Person() {
 	}
 
-	public Person(long tc, int idAccount, String name, String surname, LocalDateTime registerDate,
-			LocalDateTime birthDate, long phoneNumber) {
+	public Person(long tc, String name, String surname, LocalDate birthDate, int idReservation, Date entryDate,
+			Date outDate) {
 		this.tc = tc;
-		this.idAccount = idAccount;
 		this.name = name;
 		this.surname = surname;
-		this.registerDate = registerDate;
 		this.birthDate = birthDate;
-		this.phoneNumber = phoneNumber;
+		this.setEntryDate(entryDate);
+		this.setOutDate(outDate);
+		this.setIdReservation(idReservation);
 	}
 
 	public int getIdPerson() {
@@ -58,14 +66,6 @@ public class Person {
 		this.tc = tc;
 	}
 
-	public int getIdAccount() {
-		return idAccount;
-	}
-
-	public void setIdAccount(int idAccount) {
-		this.idAccount = idAccount;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -82,27 +82,36 @@ public class Person {
 		this.surname = surname;
 	}
 
-	public LocalDateTime getRegisterDate() {
-		return registerDate;
-	}
-
-	public void setRegisterDate(LocalDateTime registerDate) {
-		this.registerDate = registerDate;
-	}
-
-	public LocalDateTime getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(LocalDateTime birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
-	public long getPhoneNumber() {
-		return phoneNumber;
+	public int getIdReservation() {
+		return idReservation;
 	}
 
-	public void setPhoneNumber(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setIdReservation(int idReservation) {
+		this.idReservation = idReservation;
 	}
+
+	public Date getEntryDate() {
+		return entryDate;
+	}
+
+	public void setEntryDate(Date entryDate) {
+		this.entryDate = entryDate;
+	}
+
+	public Date getOutDate() {
+		return outDate;
+	}
+
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
+	}
+
 }

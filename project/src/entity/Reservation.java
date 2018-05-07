@@ -1,40 +1,55 @@
 package entity;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "reservation")
 public class Reservation {
 
 	@Id
+	@Column(name = "idReservation")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idReservation;
 
+	@Column(name = "idHotel")
 	private int idHotel;
 
+	@Column(name = "idRoom")
 	private int idRoom;
 
-	private long tcCustomer;
+	@Column(name = "startDate")
+	private Date startDate;
 
-	private long tcEmployee;
-
-	private LocalDateTime date;
-
+	@Column(name = "amount")
 	private double amount;
+
+	@Column(name = "tcCustomer")
+	private long tcCustomer;
 
 	public Reservation() {
 	}
 
-	public Reservation(int idHotel, int idRoom, long tcCustomer, long tcEmployee, LocalDateTime date, double amount) {
-		this.idHotel = idHotel;
-		this.idRoom = idRoom;
-		this.tcCustomer = tcCustomer;
-		this.tcEmployee = tcEmployee;
-		this.date = date;
-		this.amount = amount;
+	public Reservation(int idHotel, int idRoom, LocalDate localDate, double amount, long tcCustomer) {
+		this.setIdCustomer(tcCustomer);
+		this.setIdHotel(idHotel);
+		this.setIdRoom(idRoom);
+		this.setDate(localDate);
+		this.setAmount(amount);
+	}
+
+	public Reservation(int idHotel, int idRoom, LocalDate date, double amount) {
+		this.setIdHotel(idHotel);
+		this.setIdRoom(idRoom);
+		this.setDate(date);
+		this.setAmount(amount);
 	}
 
 	public int getIdReservation() {
@@ -61,28 +76,12 @@ public class Reservation {
 		this.idRoom = idRoom;
 	}
 
-	public long getTcCustomer() {
-		return tcCustomer;
+	public Date getDate() {
+		return startDate;
 	}
 
-	public void setTcCustomer(long tcCustomer) {
-		this.tcCustomer = tcCustomer;
-	}
-
-	public long getTcEmployee() {
-		return tcEmployee;
-	}
-
-	public void setTcEmployee(long tcEmployee) {
-		this.tcEmployee = tcEmployee;
-	}
-
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setDate(LocalDate date) {
+		this.startDate = Date.valueOf(date);
 	}
 
 	public double getAmount() {
@@ -92,4 +91,13 @@ public class Reservation {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
+	public long getIdCustomer() {
+		return tcCustomer;
+	}
+
+	public void setIdCustomer(long tcCustomer) {
+		this.tcCustomer = tcCustomer;
+	}
+
 }

@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXDialog.DialogTransition;
 import com.jfoenix.controls.JFXDialogLayout;
 
 import entity.Address;
+import entity.Customer;
 import entity.Hotel;
 import entity.Room;
 import javafx.fxml.FXML;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import main.MainClass;
 import model.CustomerResultListModel;
 import utility.EntityManagerUtility;
 
@@ -70,12 +72,31 @@ public class CustomerResultListController implements Initializable {
 		columnFreeRoomCount.setCellValueFactory(new PropertyValueFactory<>("freeRoomCount"));
 		columnMinimumAmount.setCellValueFactory(new PropertyValueFactory<>("minimumAmount"));
 
-		getData();
-		tableView.getItems().addAll(tableData);
+		Query query = entityManager.createNativeQuery("select * from customer where idAccount=?1", Customer.class);
+		query.setParameter(1, MainClass.account.getIdAccount());
+		Customer customer = (Customer) query.getResultList().get(0);
+		query = entityManager.createNativeQuery("select idReservation from person where outDate<entryDate and tc=?1");
+		query.setParameter(1, customer.getTc());
+		if (!query.getResultList().isEmpty()) { // bu müþterini açýkta bir rezervasyonu var
+			ReservationDetailsController.idReservation = (int) query.getResultList().get(0);
+			Parent dialogFXML = null;
+			try {
+				dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/ReservationDetails.fxml"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			JFXDialogLayout dialogLayout = new JFXDialogLayout();
+			dialogLayout.setBody(dialogFXML);
+			JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.CENTER);
+			dialog.show();
+		} else {
+			getData();
+			tableView.getItems().addAll(tableData);
+		}
 
 		tableView.setOnMouseClicked(e -> {
 			if (e.getClickCount() == 2) {
-				CustomerReservationRoomListController.selected=tableView.getSelectionModel().getSelectedItem();
+				CustomerReservationRoomListController.selected = tableView.getSelectionModel().getSelectedItem();
 				Parent dialogFXML = null;
 				try {
 					dialogFXML = FXMLLoader.load(getClass().getResource("/fxml/CustomerReservationRoomList.fxml"));
