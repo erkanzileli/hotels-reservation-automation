@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialogLayout?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<JFXDialogLayout maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateCompanyController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="25.0" layoutY="25.0" text="Yeni Şirket Kaydı">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtCompanyName" layoutX="25.0" layoutY="75.0" promptText="Şirket Adı" />
+            <JFXTextField fx:id="txtManagerMemberName" layoutX="25.0" layoutY="175.0" prefWidth="150.0" promptText="Kullanıcı Adı" />
+            <JFXTextField fx:id="txtManagerTC" layoutX="25.0" layoutY="225.0" prefWidth="150.0" promptText="T.C." />
+            <JFXTextField fx:id="txtManagerName" layoutX="25.0" layoutY="275.0" prefWidth="150.0" promptText="İsim" />
+            <JFXTextField fx:id="txtManagerSurname" layoutX="25.0" layoutY="325.0" prefWidth="150.0" promptText="Soyisim" />
+            <Label layoutX="25.0" layoutY="125.0" text="Genel Müdür Bilgileri">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <JFXPasswordField fx:id="txtManagerPasswordAgain" layoutX="200.0" layoutY="225.0" prefWidth="150.0" promptText="Şifre Tekrar" />
+            <JFXPasswordField fx:id="txtManagerPassword" layoutX="200.0" layoutY="175.0" prefWidth="150.0" promptText="Şifre" />
+            <JFXButton focusTraversable="false" layoutX="200.0" layoutY="325.0" onAction="#save" prefWidth="150.0" style="-fx-background-color: #52f158;" text="Kaydet" />
+         </children>
+      </Pane>
+   </children>
+</JFXDialogLayout>

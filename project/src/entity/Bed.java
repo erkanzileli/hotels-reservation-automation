@@ -1,5 +1,6 @@
 package entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,19 +10,22 @@ import javax.persistence.Id;
 public class Bed {
 
 	@Id
+	@Column(name = "idBed")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBed;
 
+	@Column(name = "idRoom")
 	private int idRoom;
 
-	private int BedType;
+	@Column(name = "capacity")
+	private int capacity;
 
 	public Bed() {
 	}
 
 	public Bed(int idRoom, int bedType) {
 		this.idRoom = idRoom;
-		BedType = bedType;
+		capacity = bedType;
 	}
 
 	public int getIdBed() {
@@ -40,11 +44,11 @@ public class Bed {
 		this.idRoom = idRoom;
 	}
 
-	public int getBedType() {
-		return BedType;
+	public int getCapacity() {
+		return capacity;
 	}
 
-	public void setBedType(int bedType) {
-		BedType = bedType;
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 }

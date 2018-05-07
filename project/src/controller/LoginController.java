@@ -62,6 +62,7 @@ public class LoginController implements Initializable {
 			MainClass.account = user;
 			String type = user.getType();
 			if ("SYSTEMMANAGER".equals(type)) {
+				loadFXML("SystemManagerMain.fxml");
 				System.out.println("CreateSystemManagerPage");
 			} else if ("GENERALMANAGER".equals(type)) {
 				GeneralManagerMainController.generalManager.setIdAccount(user.getIdAccount());
@@ -71,7 +72,7 @@ public class LoginController implements Initializable {
 			} else if ("RECEPTIONIST".equals(type)) {
 				loadFXML("ReceptionistMain.fxml");
 			} else if ("CUSTOMER".equals(type)) {
-				loadFXML("CustomerMain.fxml");
+				loadFXML("CustomerResultList.fxml");
 			} else {
 				Alert alertNotFound = new Alert(AlertType.ERROR,
 						"Bilinmeyen bir hata oluþtu. Saðlayýcýnýz ile iletiþime geçiniz");

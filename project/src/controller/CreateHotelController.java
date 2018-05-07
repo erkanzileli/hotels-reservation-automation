@@ -156,8 +156,10 @@ public class CreateHotelController implements Initializable {
 					} catch (Exception e) {
 					}
 					if (tc != 0) {
-						query = entityManager.createNativeQuery("SELECT * FROM LocalManager WHERE tc=?1",
-								LocalManager.class);
+						query = entityManager.createNativeQuery(
+								"SELECT * FROM LocalManager WHERE tc=?1 && idAccount=?2", LocalManager.class);
+						query.setParameter(1, tc);
+						query.setParameter(2, GeneralManagerMainController.generalManager.getIdAccount());
 						if (query.getResultList().isEmpty()) {
 							if (!txtManagerPassword.getText().trim().equals("")
 									&& !txtManagerPasswordAgain.getText().trim().equals("")) {
@@ -181,7 +183,7 @@ public class CreateHotelController implements Initializable {
 							}
 						} else {
 							createAlert(AlertType.ERROR, "Hata", null,
-									"Bu T.C. kimlik numarasýna sahip bir müdür sistemde mevcut.").show();
+									"Bu T.C. kimlik numarasýna sahip bir müdür þirketinizde mevcut.").show();
 							return false;
 						}
 					} else {
@@ -268,8 +270,7 @@ public class CreateHotelController implements Initializable {
 					entityManager.getTransaction().commit();
 
 					// mudur icin hesap olusturulur
-					Account account = new Account(managerName, managerSurname, memberName, passwd,
-							"LOCALMANAGER");
+					Account account = new Account(managerName, managerSurname, memberName, passwd, "LOCALMANAGER");
 					entityManager.getTransaction().begin();
 					entityManager.persist(account);
 					entityManager.getTransaction().commit();

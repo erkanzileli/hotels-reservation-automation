@@ -1,16 +1,22 @@
 package entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "generalmanager")
 public class GeneralManager {
 
 	@Id
+	@Column(name = "tc")
 	private long tc;
 
+	@Column(name = "idAccount")
 	private int idAccount;
 
+	@Column(name = "idCompany")
 	private int idCompany;
 
 	public GeneralManager() {

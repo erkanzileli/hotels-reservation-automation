@@ -4,7 +4,7 @@
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -13,11 +13,6 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <JFXToggleButton fx:id="toggleCorrection" focusTraversable="false" layoutX="450.0" prefHeight="25.0" prefWidth="150.0" text="Düzenleme">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXToggleButton>
             <Label layoutX="15.0" layoutY="15.0" text="Otel Bilgileri">
                <font>
                   <Font size="24.0" />
@@ -42,13 +37,23 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtManagerMemberName" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="175.0" prefHeight="25.0" prefWidth="150.0" promptText="Kullanıcı Adı" />
-            <JFXTextField fx:id="txtManagerName" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Adı" />
-            <JFXTextField fx:id="txtManagerSurname" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Soyadı" />
-            <JFXTextField fx:id="txtManagerTC" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="325.0" prefHeight="25.0" prefWidth="150.0" promptText="T.C." />
-            <JFXPasswordField fx:id="txtPassword" focusColor="#009688" layoutX="425.0" layoutY="225.0" prefWidth="150.0" promptText="Şifre" />
-            <JFXPasswordField fx:id="txtPasswordAgain" focusColor="#009688" layoutX="425.0" layoutY="275.0" prefColumnCount="5" prefWidth="150.0" promptText="Şifre" />
-            <JFXButton disable="true" focusTraversable="false" layoutX="425.0" layoutY="325.0" onAction="#changeManager" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3dff6c;" text="Müdür Değiştir" />
+            <JFXTextField fx:id="txtManagerMemberName" disable="true" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="175.0" prefHeight="25.0" prefWidth="150.0" promptText="Kullanıcı Adı" />
+            <JFXTextField fx:id="txtManagerName" disable="true" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="225.0" prefHeight="25.0" prefWidth="150.0" promptText="Adı" />
+            <JFXTextField fx:id="txtManagerSurname" disable="true" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="275.0" prefHeight="25.0" prefWidth="150.0" promptText="Soyadı" />
+            <JFXTextField fx:id="txtManagerTC" disable="true" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="325.0" prefHeight="25.0" prefWidth="150.0" promptText="T.C." />
+            <JFXPasswordField fx:id="txtPassword" disable="true" focusColor="#009688" layoutX="425.0" layoutY="225.0" prefWidth="150.0" promptText="Şifre" />
+            <JFXPasswordField fx:id="txtPasswordAgain" disable="true" focusColor="#009688" layoutX="425.0" layoutY="275.0" prefColumnCount="5" prefWidth="150.0" promptText="Şifre" />
+            <JFXButton fx:id="btnSaveManager" disable="true" focusTraversable="false" layoutX="425.0" layoutY="325.0" onAction="#save" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3dff6c;" text="Kaydet" />
+            <JFXButton fx:id="btnManagerAdd" layoutX="425.0" layoutY="175.0" onAction="#newManager" prefWidth="75.0" text="Tanımla">
+               <graphic>
+                  <FontAwesomeIconView glyphName="PLUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnManagerRemove" graphicTextGap="10.0" layoutX="500.0" layoutY="175.0" onAction="#removeManager" prefWidth="75.0" text="Sil">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TRASH" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>

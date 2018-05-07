@@ -26,22 +26,26 @@ public class Employee {
 	@Column(name = "lastname")
 	private String lastname;
 
+	private int idCompany;
+
 	public Employee() {
 	}
 
-	public Employee(long tc, int idAccount, int idHotel, String type) {
+	public Employee(long tc, int idAccount, int idHotel, String type, int idCompany) {
 		this.tc = tc;
 		this.idAccount = idAccount;
 		this.idHotel = idHotel;
-		this.setType(type);
+		this.idCompany = idCompany;
+		this.type = type;
 	}
 
-	public Employee(long tc, int idHotel, String type, String firstname, String lastname) {
+	public Employee(long tc, int idHotel, String type, String firstname, String lastname, int idCompany) {
 		this.tc = tc;
 		this.idHotel = idHotel;
 		this.setType(type);
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.idCompany = idCompany;
 	}
 
 	public long getTc() {
@@ -90,6 +94,14 @@ public class Employee {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	public int getIdCompany() {
+		return idCompany;
+	}
+
+	public void setIdCompany(int idCompany) {
+		this.idCompany = idCompany;
 	}
 
 }

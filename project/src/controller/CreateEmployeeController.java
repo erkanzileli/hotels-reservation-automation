@@ -12,7 +12,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import entity.Account;
-import entity.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -100,8 +99,7 @@ public class CreateEmployeeController implements Initializable {
 
 	private boolean receptionistValidate() {
 		if (txtMemberName.getText().trim().length() > 0 && txtMemberName.getText().trim().length() < 21) {
-			Query query = entityManager
-					.createNativeQuery("SELECT * FROM Account WHERE memberName=?1");
+			Query query = entityManager.createNativeQuery("SELECT * FROM Account WHERE memberName=?1");
 			query.setParameter(1, txtMemberName.getText().trim());
 			if (query.getResultList().isEmpty()) {
 				if (txtPassword.getText().trim().equals(txtPasswordAgain.getText().trim())) {
@@ -139,13 +137,14 @@ public class CreateEmployeeController implements Initializable {
 					entityManager.getTransaction().commit();
 
 					Query query = entityManager.createNativeQuery(
-							"insert into employee(tc, idHotel, type, firstname, lastname, idAccount) VALUES (?1,?2,?3,?4,?5,?6)");
+							"insert into employee(tc, idHotel, type, firstname, lastname, idAccount, idCompany) VALUES (?1,?2,?3,?4,?5,?6,?7)");
 					query.setParameter(1, tc);
 					query.setParameter(2, idHotel);
 					query.setParameter(3, position);
 					query.setParameter(4, firstname);
 					query.setParameter(5, lastname);
 					query.setParameter(6, employeeAccount.getIdAccount());
+					query.setParameter(7, LocalManagerMainController.thisLocalManager.getIdCompany());
 					entityManager.getTransaction().begin();
 					query.executeUpdate();
 					entityManager.getTransaction().commit();
@@ -154,12 +153,13 @@ public class CreateEmployeeController implements Initializable {
 			} else {
 				System.out.println("normal çalýþan");
 				Query query = entityManager.createNativeQuery(
-						"insert into employee(tc, idHotel, type, firstname, lastname) VALUES (?1,?2,?3,?4,?5)");
+						"insert into employee(tc, idHotel, type, firstname, lastname,idCompany) VALUES (?1,?2,?3,?4,?5,?6)");
 				query.setParameter(1, tc);
 				query.setParameter(2, idHotel);
 				query.setParameter(3, position);
 				query.setParameter(4, firstname);
-				query.setParameter(6, lastname);
+				query.setParameter(5, lastname);
+				query.setParameter(6, LocalManagerMainController.thisLocalManager.getIdCompany());
 				entityManager.getTransaction().begin();
 				query.executeUpdate();
 				entityManager.getTransaction().commit();

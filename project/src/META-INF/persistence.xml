@@ -18,6 +18,7 @@
 		<class>entity.Reservated</class>
 		<class>entity.Reservation</class>
 		<class>entity.Room</class>
+		<class>entity.Company</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/ors?serverTimezone=UTC" />

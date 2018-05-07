@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXDialogLayout?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -26,12 +25,10 @@
                </font>
             </JFXToggleButton>
             <JFXTextField fx:id="txtSurname" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Soyisim" />
-            <JFXTextField fx:id="txtPhoneNumber" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="25.0" layoutY="210.0" prefHeight="25.0" prefWidth="150.0" promptText="Telefon Numarası" text="+90" />
-            <JFXDatePicker fx:id="txtBirthDate" editable="false" focusTraversable="false" layoutX="25.0" layoutY="260.0" overLay="true" prefHeight="25.0" prefWidth="150.0" promptText="Doğum Tarihi" />
             <JFXPasswordField fx:id="txtOldPasswd" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" promptText="Mevcut Şifre" />
             <JFXPasswordField fx:id="txtNewPasswd" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Yeni Şifre" />
             <JFXPasswordField fx:id="txtNewPasswdAgain" editable="false" focusColor="#009688" focusTraversable="false" labelFloat="true" layoutX="225.0" layoutY="210.0" prefHeight="25.0" prefWidth="150.0" promptText="Yeni Şifre Tekrar" />
-            <JFXButton focusTraversable="false" layoutX="225.0" layoutY="260.0" onAction="#save" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #15ff63;" text="Kaydet" />
+            <JFXButton fx:id="btnSave" disable="true" focusTraversable="false" layoutX="25.0" layoutY="210.0" onAction="#save" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #15ff63;" text="Kaydet" />
          </children></Pane>
    </children>
 </JFXDialogLayout>

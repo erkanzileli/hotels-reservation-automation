@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: ORANGE;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerResultListController">
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="800.0" style="-fx-background-color: ORANGE;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerResultListController">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Label layoutX="25.0" layoutY="25.0" text="Arama Sonucu">
+            <Label layoutX="25.0" layoutY="25.0" text="Rezervasyona Müsait Oteller" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <JFXTreeTableView layoutX="25.0" layoutY="100.0" prefHeight="525.0" prefWidth="950.0">
-               <columns>
-                  <TreeTableColumn minWidth="75.0" prefWidth="200.0" text="Otel Adı" />
-                  <TreeTableColumn minWidth="75.0" prefWidth="150.0" text="Otel Markası" />
-                  <TreeTableColumn minWidth="50.0" prefWidth="100.0" text="İl" />
-                  <TreeTableColumn minWidth="50.0" prefWidth="100.0" text="İlçe" />
-                  <TreeTableColumn minWidth="50.0" prefWidth="100.0" text="Boş Oda Sayısı" />
-                  <TreeTableColumn minWidth="75.0" prefWidth="150.0" text="En Düşük Gecelik Ücret" />
-                  <TreeTableColumn minWidth="75.0" prefWidth="150.0" text="En Yüksek Gecelik Ücret" />
-               </columns>
-            </JFXTreeTableView>
-            <JFXButton buttonType="RAISED" graphicTextGap="15.0" layoutX="650.0" layoutY="40.0" onAction="#openFilterDialog" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: ORANGE;" text="Filtre">
+            <JFXButton buttonType="RAISED" graphicTextGap="15.0" layoutX="650.0" layoutY="40.0" onAction="#openFilterDialog" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: ORANGE;" text="Filtre" textFill="WHITE">
                <font>
-                  <Font size="15.0" />
+                  <Font size="18.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="FILTER" size="25" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="FILTER" size="25" />
                </graphic>
             </JFXButton>
+            <TableView fx:id="tableView" layoutX="25.0" layoutY="100.0" prefHeight="500.0" prefWidth="750.0">
+              <columns>
+                  <TableColumn fx:id="columnHotelName" minWidth="75.0" prefWidth="150.0" text="Otel Adı" />
+                <TableColumn fx:id="columnHotelBrand" minWidth="75.0" prefWidth="150.0" text="Otel Markası" />
+                <TableColumn fx:id="columnProvince" minWidth="50.0" prefWidth="100.0" text="İl" />
+                  <TableColumn fx:id="columnDistrict" minWidth="50.0" prefWidth="100.0" text="İlçe" />
+                  <TableColumn fx:id="columnFreeRoomCount" prefWidth="100.0" text="Boş Oda Sayısı" />
+                  <TableColumn fx:id="columnMinimumAmount" prefWidth="150.0" text="En Düşük Ücret" />
+              </columns>
+            </TableView>
          </children>
       </Pane>
    </children>

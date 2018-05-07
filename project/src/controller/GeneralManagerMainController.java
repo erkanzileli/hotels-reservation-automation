@@ -51,6 +51,8 @@ public class GeneralManagerMainController implements Initializable {
 	private List<Hotel> hotels;
 
 	public static GeneralManager generalManager = new GeneralManager();
+	
+	public static JFXDialog hotelDetailsDialog;
 
 	private EntityManager entityManager;
 
@@ -164,7 +166,7 @@ public class GeneralManagerMainController implements Initializable {
 				dialogLayout.setBody(dialogFXML);
 				JFXDialog dialog = new JFXDialog(root, dialogLayout, DialogTransition.CENTER);
 				dialog.show();
-
+				hotelDetailsDialog=dialog;
 			});
 			index++;
 		}

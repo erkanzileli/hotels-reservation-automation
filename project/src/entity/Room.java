@@ -1,5 +1,6 @@
 package entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,27 +10,44 @@ import javax.persistence.Id;
 public class Room {
 
 	@Id
+	@Column(name = "idRoom")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idRoom;
 
+	@Column(name = "idHotel")
 	private int idHotel;
 
+	@Column(name = "type")
 	private String type;
 
+	@Column(name = "number")
 	private int number;
 
+	@Column(name = "phoneNumber")
 	private long phoneNumber;
 
+	@Column(name = "status")
 	private String status;
+
+	@Column(name = "amount")
+	private double amount;
 
 	public Room() {
 	}
 
-	public Room(int idHotel, String type, int number, long phoneNumber, String status) {
+	public Room(int idHotel, String type, int number, long phoneNumber, String status, double amount) {
 		this.idHotel = idHotel;
 		this.type = type;
 		this.number = number;
 		this.phoneNumber = phoneNumber;
+		this.status = status;
+		this.amount = amount;
+	}
+
+	public Room(int idHotel, String type, int number, String status) {
+		this.idHotel = idHotel;
+		this.type = type;
+		this.number = number;
 		this.status = status;
 	}
 
@@ -79,5 +97,13 @@ public class Room {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 }
